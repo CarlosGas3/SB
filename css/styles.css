@@ -1,4 +1,37 @@
+/* Reiniciar estilos generales */
 * {
     margin: 0;
     padding: 0;
+}
+
+/* Estilos del header */
+header {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+#logo {
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+}
+
+.icono {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+
+/* Estilos del footer */
+footer {
+    background-color: black;
 }
