@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowBan - Iniciar Sesión / Registro</title>
+    <link rel="stylesheet" href="../css/iniciarSesion.css">
+</head>
+
+<body>
+    <header>
+        <a href="inicio.html"><img src="../imagenes/logoPNGpurple.png" alt="Logo de ShadowBan" id="logo"></a>
+        <ul>
+            <li><a href="contacto.html"><img src="../imagenes/info.png" alt="Contacto" class="icono"></a></li>
+            <li><a href="carrito.html"><img src="../imagenes/carrito.png" alt="Carrito" class="icono"></a></li>
+            <li><a href="iniciarSesion.html"><img src="../imagenes/usuario.png" alt="Contacto" class="icono"></a></li>
+        </ul>
+    </header>
+    <main>
+        <article id="iniciarSesion">
+            <h2>Iniciar sesión</h2>
+            <form>
+                <label for="email">Correo electrónico:</label>
+                <input type="text" id="email" name="email" required>
+
+                <label for="passw">Contraseña:</label>
+                <input type="passw" id="passw" name="passw" required>
+
+                <button type="submit" id="iniciarSesion">Iniciar sesión</button>
+            </form>
+        </article>
+        <article id="registrarse">
+            <h2>Crea tu cuenta si aún no la tienes</h2>
+            <form>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefono">Número de teléfono:</label>
+                <input type="number" id="telefono" name="telefono" required>
+
+                <label for="fecha">Fecha de nacimiento:</label>
+                <input type="date" id="fecha" name="fecha" required>
+
+                <label>
+                    <input type="checkbox" id="aceptar" name="aceptar_terminos" required>
+                    He leído y acepto los Términos y Condiciones
+                </label>
+
+                <button type="submit" id="registrarse">Crear cuenta</button>
+            </form>
+        </article>
+
+    </main>
+    <footer>
+        <img src="../imagenes/logoPNGpurple.png" alt="Logo de ShadowBan" id="logo">
+        <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

@@ -30,8 +30,21 @@ header ul {
     height: 40px;
 }
 
+/* Estilos main */
+main {
+    background-color: darkgray;
+}
+
 
 /* Estilos del footer */
 footer {
     background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p {
+    color: rgb(80, 0, 120);
+    padding: 10px;
 }
