@@ -35,9 +35,18 @@ main {
     background-color: darkgray;
 }
 
-#products img {
-    width: 300px;
-    height: 300px;
+.container {
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: block;
+    align-content: center;
+}
+
+.container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
 }
 
 /* Estilos del footer */
