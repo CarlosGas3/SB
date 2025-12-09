@@ -1,3 +1,12 @@
+const spotifyPlayer = () => {
+    const btn = document.getElementById("spotify");
+    const overlay = document.getElementById("overlay");
+
+    btn.addEventListener("click", () => {
+        overlay.style.display = (overlay.style.display === "block") ? "none" : "block";
+    });
+}
+
 async function loadProductsVinsi() {
     try {
         const res = await fetch("../JSON/productsVinsi72.json");

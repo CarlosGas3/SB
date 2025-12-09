@@ -30,25 +30,6 @@ header ul {
     height: 40px;
 }
 
-/* Estilos main */
-main {
-    background-color: darkgray;
-}
-
-.container {
-    box-sizing: border-box;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    display: block;
-    align-content: center;
-}
-
-.container:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
-}
-
 /* Estilos Spotify */
 #spotify {
     position: fixed;
