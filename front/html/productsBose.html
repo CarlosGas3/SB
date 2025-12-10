@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShadowBan - Inicio</title>
-    <link rel="stylesheet" href="../css/merchan.css" />
+    <title>ShadowBan - Productos de Bosecondieresis</title>
+    <link rel="stylesheet" href="../css/products.css" />
     <script src="../js/scripts.js"></script>
 </head>
 
@@ -25,35 +25,16 @@
         </ul>
     </header>
     <main>
-        <h1>Merchan de grupos que seguro que te gustan</h1>
-        <div class="container">
-            <h2>MG Knowledge</h2>
-            <img src="../assets/merchan/mgLogo.jpg" alt="Logo de MG Knowledge">
-            <a href="https://mgknowledge.store/" target="_blank">
-                <button class="boton">Ver productos</button>
-            </a>
-        </div>
-        <div class="container">
-            <h2>Hoke</h2>
-            <img src="../assets/merchan/bbo.jpg" alt="Logo de Hoke BBO">
-            <a href="https://hokebbo.com/collections/shop" target="_blank">
-                <button class="boton">Ver productos</button>
-            </a>
-        </div>
-        <div class="container">
-            <h2>Peelingflesh</h2>
-            <img src="../assets/merchan/peelingflesh.jpg" alt="Logo de peelingflesh">
-            <a href="https://peelingflesh.store/" target="_blank">
-                <button class="boton">Ver productos</button>
-            </a>
-        </div>
+        <div id="products"></div>
         <img id="spotify" src="../assets/spotify.webp" alt="Logo de Spotify">
         <div id="overlay">
             <iframe src="spotifyPlayer.html"></iframe>
         </div>
         <script>
+            loadProductsBose();
             spotifyPlayer();
         </script>
+
     </main>
     <footer>
         <img src="../assets/logoPNGpurple.png" alt="Logo de ShadowBan" id="logo" />

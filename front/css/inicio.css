@@ -49,7 +49,7 @@ main {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
 }
 
-/* Estilos Spotify */
+/* Estilos reproductor Spotify */
 #spotify {
     position: fixed;
     right: 20px;
@@ -63,15 +63,12 @@ main {
 #overlay {
     position: fixed;
     right: 120px;
-    /* separación respecto a la imagen */
     bottom: 20px;
     width: 500px;
-    /* tamaño del cuadro */
     height: 250px;
     background: white;
     border-radius: 10px;
     display: none;
-    /* oculto al inicio */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     z-index: 999;
     overflow: hidden;

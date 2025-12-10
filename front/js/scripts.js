@@ -33,3 +33,85 @@ async function loadProductsVinsi() {
             "Error cargando productos.";
     }
 }
+
+async function loadProductsBose() {
+    try {
+        const res = await fetch("../JSON/productsBose.json");
+        const data = await res.json();
+        const products = data.products;
+        const container = document.getElementById("products");
+        container.innerHTML = "";
+
+        products.forEach((p) => {
+            const div = document.createElement("div");
+            div.className = "product";
+
+            // Obtener primera variante disponible
+            const variant = p.variants?.[0];
+
+            // Obtener precio
+            const price = variant?.price
+                ? variant.price + "€"
+                : "Este producto no está disponible por ahora.";
+
+            // Botón dinámico si el precio no existe
+            const btnText = variant?.price ? "Comprar producto" : "Ver producto";
+
+            // Imagen del producto
+            const imgSrc = variant?.featured_image?.src || "";
+
+            // URL del producto usando handle
+            const productUrl = `https://bosecondieresis.net/products/${p.handle}`;
+
+            div.innerHTML = `
+                <img src="${imgSrc}" alt="${p.title}">
+                <h3>${p.title}</h3>
+                <p>${price}</p>
+                <button onclick="window.open('${productUrl}', '_blank')">
+                    ${btnText}
+                </button>
+            `;
+            container.appendChild(div);
+        });
+    } catch (error) {
+        console.error("Error cargando productos:", error);
+        document.getElementById("products").innerText =
+            "Error cargando productos.";
+    }
+}
+
+const cambiarImagenMerchan = () => {
+    const imagenes = [
+        "../assets/merchan/bbo.jpg",
+        "../assets/merchan/mgLogo.jpg",
+        "../assets/merchan/peelingflesh.jpg"
+    ];
+
+    let indice = 0;
+    const img = document.getElementById("merchan");
+
+    function cambiarImagenMerchan() {
+        indice = (indice + 1) % imagenes.length;
+        img.src = imagenes[indice];
+    }
+
+    setInterval(cambiarImagenMerchan, 10000);
+}
+
+const cambiarImagenIndie = () => {
+    const imagenes = [
+        "../assets/indie/0pulenz3.jpg",
+        "../assets/indie/bosecondieresis.jpg",
+        "../assets/indie/vinsi72.jpg"
+    ];
+
+    let indice = 0;
+    const img = document.getElementById("indie");
+
+    function cambiarImagenIndie() {
+        indice = (indice + 1) % imagenes.length;
+        img.src = imagenes[indice];
+    }
+
+    setInterval(cambiarImagenIndie, 10000);
+}
