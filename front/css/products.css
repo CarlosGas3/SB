@@ -40,6 +40,23 @@ main {
     height: 300px;
 }
 
+/* Estilos botón Back */
+#back {
+    position: fixed;
+    top: 200px;
+    /* Ajusta según la altura del header */
+    left: 30px;
+    z-index: 9999;
+
+    width: 32px;
+    height: 32px;
+}
+
+#back img {
+    width: 100%;
+    height: 100%;
+}
+
 /* Estilos Spotify */
 #spotify {
     position: fixed;

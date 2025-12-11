@@ -46,21 +46,16 @@ async function loadProductsBose() {
             const div = document.createElement("div");
             div.className = "product";
 
-            // Obtener primera variante disponible
             const variant = p.variants?.[0];
 
-            // Obtener precio
             const price = variant?.price
                 ? variant.price + "€"
                 : "Este producto no está disponible por ahora.";
 
-            // Botón dinámico si el precio no existe
             const btnText = variant?.price ? "Comprar producto" : "Ver producto";
 
-            // Imagen del producto
-            const imgSrc = variant?.featured_image?.src || "";
+            const imgSrc = p.images?.[0]?.src || "";
 
-            // URL del producto usando handle
             const productUrl = `https://bosecondieresis.net/products/${p.handle}`;
 
             div.innerHTML = `
