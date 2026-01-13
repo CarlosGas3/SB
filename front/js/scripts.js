@@ -18,7 +18,7 @@ async function loadProductsVinsi() {
             const div = document.createElement("div");
             div.className = "product";
             let price = p.price ? p.price + "€" : "Este producto no está disponible por ahora.";
-            let btnText = isNaN(p.price) ? "Ver producto" : "Comprar producto";
+            let btnText = isNaN(p.price) ? "Ver producto" : "Añadir al carrito";
             div.innerHTML = `
                     <img src="${p.images[0].url}" alt="${p.name}">
                     <h3>${p.name}</h3>
@@ -52,7 +52,7 @@ async function loadProductsBose() {
                 ? variant.price + "€"
                 : "Este producto no está disponible por ahora.";
 
-            const btnText = variant?.price ? "Comprar producto" : "Ver producto";
+            const btnText = variant?.price ? "Añadir al carrito" : "Ver producto";
 
             const imgSrc = p.images?.[0]?.src || "";
 
@@ -85,6 +85,10 @@ const cambiarImagenMerchan = () => {
     let indice = 0;
     const img = document.getElementById("merchan");
 
+    img.style.width = "300px";
+    img.style.height = "300px";
+    img.style.objectFit = "cover";
+
     function cambiarImagenMerchan() {
         indice = (indice + 1) % imagenes.length;
         img.src = imagenes[indice];
@@ -102,6 +106,10 @@ const cambiarImagenIndie = () => {
 
     let indice = 0;
     const img = document.getElementById("indie");
+
+    img.style.width = "300px";
+    img.style.height = "300px";
+    img.style.objectFit = "cover";
 
     function cambiarImagenIndie() {
         indice = (indice + 1) % imagenes.length;
