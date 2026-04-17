@@ -132,7 +132,7 @@ main::before {
     letter-spacing: -0.03em;
     text-align: center;
     color: transparent;
-    background: linear-gradient(90deg, #d8f2ff 8%, #90c5ff 45%, #e6e8f8 85%);
+    background: linear-gradient(90deg, #ffffff 8%, #ae90ff 45%, #490ea8 85%);
     -webkit-background-clip: text;
     background-clip: text;
 }
