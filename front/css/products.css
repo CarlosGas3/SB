@@ -1,139 +1,208 @@
-/* Reiniciar estilos generales */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Syne:wght@600;700;800&display=swap");
+
+:root {
+    --bg-main: #060708;
+    --text-main: #edf3ff;
+    --text-soft: #b6bfd1;
+    --line: rgba(255, 255, 255, 0.15);
+    --card: rgba(255, 255, 255, 0.03);
+    --cta-bg: #f3f5f8;
+    --cta-text: #111319;
+    --shadow-glow: rgba(139, 201, 255, 0.35);
+}
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Estilos del header */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% -10%, rgba(180, 220, 255, 0.14), transparent 35%), var(--bg-main);
+    color: var(--text-main);
+    font-family: "Manrope", sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(250, 250, 255, 0.95) 0%, rgba(148, 187, 255, 0.28) 45%, transparent 72%);
+    box-shadow: 0 0 28px rgba(190, 217, 255, 0.35);
+    pointer-events: none;
+}
+
 header {
-    background-color: black;
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 28px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.35));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 header ul {
-    list-style-type: none;
+    list-style: none;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 14px;
 }
 
 #logo {
-    padding: 10px;
-    width: 150px;
-    height: 150px;
+    width: 112px;
+    height: 112px;
+    object-fit: contain;
 }
 
 .icono {
-    padding: 10px;
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
+    padding: 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
-/* Estilos main */
+.icono:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.13);
+}
+
 main {
-    background-color: darkgray;
+    position: relative;
+    min-height: calc(100vh - 250px);
+    padding: 32px 20px 100px;
 }
 
 #products {
-    box-sizing: border-box;
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(14px, 2vw, 24px);
 }
 
 .product {
-    box-sizing: border-box;
-    padding: 1rem;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
-    border: 2px solid rgb(80, 0, 120);
-    border-radius: 10px;
-    width: calc(25% - 15px);
-    height: 450px;
-    flex-shrink: 0;
+    justify-content: space-between;
+    gap: 14px;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--card));
+    min-height: 420px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
 }
 
 .product img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .product h3 {
     text-align: center;
-    color: white;
+    font-family: "Syne", sans-serif;
+    font-size: 1.2rem;
 }
 
 .product p {
-    color: rgb(80, 0, 120);
-    padding: 10px;
+    color: var(--text-soft);
     text-align: center;
+    padding: 0 4px;
 }
 
 .product button {
-    padding: 10px 20px;
-    background-color: rgb(80, 0, 120);
-    color: white;
-    border: none;
-    border-radius: 5px;
+    width: 100%;
+    min-height: 46px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--cta-bg);
+    color: var(--cta-text);
+    font-family: "Syne", sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    box-shadow: 0 10px 22px rgba(240, 246, 255, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
 }
 
 .product button:hover {
-    background-color: rgb(100, 20, 140);
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 28px var(--shadow-glow), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
 }
 
-/* Estilos botón Back */
 #back {
     position: fixed;
-    top: 200px;
-    left: 30px;
-    z-index: 9999;
+    top: 164px;
+    left: 22px;
+    z-index: 1001;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
 
-    width: 32px;
-    height: 32px;
+#back:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.18);
 }
 
 #back img {
-    width: 100%;
-    height: 100%;
+    width: 24px;
+    height: 24px;
 }
 
-/* Estilos Spotify */
 #spotify {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    width: 80px;
-    height: 80px;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
     cursor: pointer;
     z-index: 1000;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.48);
 }
 
 #overlay {
     position: fixed;
-    right: 120px;
-    /* separación respecto a la imagen */
+    right: 108px;
     bottom: 20px;
-    width: 500px;
-    /* tamaño del cuadro */
+    width: min(500px, calc(100vw - 140px));
     height: 250px;
-    background: white;
-    border-radius: 10px;
+    background: #121417;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     display: none;
-    /* oculto al inicio */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.48);
     z-index: 999;
     overflow: hidden;
 }
@@ -144,15 +213,64 @@ iframe {
     border: none;
 }
 
-/* Estilos del footer */
 footer {
-    background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    padding: 10px 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.82);
 }
 
-p {
-    color: rgb(80, 0, 120);
+footer #logo {
+    width: 82px;
+    height: 82px;
+}
+
+footer p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
     padding: 10px;
+}
+
+@media (max-width: 880px) {
+    header {
+        padding: 10px 16px;
+    }
+
+    #logo {
+        width: 92px;
+        height: 92px;
+    }
+
+    .icono {
+        width: 34px;
+        height: 34px;
+    }
+
+    #back {
+        top: 138px;
+        width: 46px;
+        height: 46px;
+    }
+
+    #overlay {
+        right: 20px;
+        bottom: 112px;
+        width: calc(100vw - 40px);
+    }
+
+    footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 520px) {
+    #products {
+        grid-template-columns: 1fr;
+    }
 }
