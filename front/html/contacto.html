@@ -17,7 +17,231 @@
             <li><a href="iniciarSesion.html"><img src="../assets/usuario.png" alt="Contacto" class="icono"></a></li>
         </ul>
     </header>
-    <main></main>
+    <main>
+        <section class="contact-container">
+            <div class="contact-header">
+                <h1>Anuncia en ShadowBan</h1>
+                <p>¿Eres artista o marca? ¡Queremos conocerte! Completa el formulario y nos pondremos en contacto contigo.</p>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <!-- Sección: Tipo de Usuario -->
+                <fieldset>
+                    <legend>¿Qué tipo de usuario eres?</legend>
+                    <div class="form-group radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="userType" value="artist" required>
+                            <span>Soy Artista</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="userType" value="brand" required>
+                            <span>Soy Marca</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Sección: Información Personal/Empresa -->
+                <fieldset>
+                    <legend>Información de Contacto</legend>
+                    
+                    <div class="form-group">
+                        <label for="name">Nombre Completo / Nombre de la Marca *</label>
+                        <input type="text" id="name" name="name" required placeholder="Ej: Juan Pérez o Mi Marca">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Teléfono *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+34 123 456 789">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">País/Región *</label>
+                        <input type="text" id="country" name="country" required placeholder="España">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="socialMedia">Redes Sociales</label>
+                        <input type="url" id="socialMedia" name="socialMedia" placeholder="Ej: https://instagram.com/tuacuenta">
+                    </div>
+                </fieldset>
+
+                <!-- Sección: Información del Artista -->
+                <fieldset id="artistInfo" style="display: none;">
+                    <legend>Información del Artista</legend>
+                    
+                    <div class="form-group">
+                        <label for="artistName">Nombre Artístico *</label>
+                        <input type="text" id="artistName" name="artistName" placeholder="Tu nombre o pseudónimo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Género Musical *</label>
+                        <input type="text" id="genre" name="genre" placeholder="Ej: Hip-Hop, Electronic, Indie">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Biografía Breve *</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Cuéntanos sobre ti y tu música (máximo 500 caracteres)" maxlength="500"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="musicLink">Enlace a tu Música</label>
+                        <input type="url" id="musicLink" name="musicLink" placeholder="Ej: Spotify, SoundCloud, YouTube">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Experiencia Previa en Streaming *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="beginner">Principiante - Acabo de empezar</option>
+                            <option value="intermediate">Intermedio - Tengo seguidores</option>
+                            <option value="advanced">Avanzado - Tengo experiencia publicando</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- Sección: Información de Marca -->
+                <fieldset id="brandInfo" style="display: none;">
+                    <legend>Información de la Marca</legend>
+                    
+                    <div class="form-group">
+                        <label for="companyName">Nombre de la Empresa *</label>
+                        <input type="text" id="companyName" name="companyName" placeholder="Nombre legal de tu empresa">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industry">Sector/Industria *</label>
+                        <input type="text" id="industry" name="industry" placeholder="Ej: Moda, Tecnología, Bebidas">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brandBio">Descripción de la Marca *</label>
+                        <textarea id="brandBio" name="brandBio" rows="4" placeholder="Describe tu marca y qué ofrecen (máximo 500 caracteres)" maxlength="500"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="targetAudience">Público Objetivo *</label>
+                        <input type="text" id="targetAudience" name="targetAudience" placeholder="Ej: Jóvenes 18-30, Amantes de la música">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Presupuesto Estimado *</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Selecciona un rango</option>
+                            <option value="0-500">€0 - €500</option>
+                            <option value="500-1000">€500 - €1.000</option>
+                            <option value="1000-5000">€1.000 - €5.000</option>
+                            <option value="5000+">€5.000+</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- Sección: Detalles de la Colaboración -->
+                <fieldset>
+                    <legend>Detalles de tu Propuesta</legend>
+                    
+                    <div class="form-group">
+                        <label for="proposalType">¿Qué tipo de colaboración buscas? *</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="collaborationType" value="sponsorship">
+                                <span>Patrocinio</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="collaborationType" value="promotion">
+                                <span>Promoción de Artista</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="collaborationType" value="advertising">
+                                <span>Publicidad</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="collaborationType" value="partnership">
+                                <span>Asociación/Partnership</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="collaborationType" value="other">
+                                <span>Otra colaboración</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensaje / Propuesta Detallada *</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Cuéntanos más detalles sobre tu propuesta, qué esperas lograr y por qué crees que es una buena oportunidad para ShadowBan (máximo 1000 caracteres)" maxlength="1000"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="files">Adjuntar Archivos (Portfolio, Fotos, Demos)</label>
+                        <input type="file" id="files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png,.mp3,.wav,.doc,.docx">
+                        <small>Puedes adjuntar hasta 5 archivos (máximo 10MB cada uno)</small>
+                    </div>
+                </fieldset>
+
+                <!-- Sección: Términos y Condiciones -->
+                <fieldset>
+                    <legend>Confirmación</legend>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" required>
+                            <span>He leído y acepto los términos y condiciones de privacidad *</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications">
+                            <span>Deseo recibir notificaciones sobre nuevas oportunidades en ShadowBan</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Botones de Envío -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Enviar Propuesta</button>
+                    <button type="reset" class="btn-reset">Limpiar Formulario</button>
+                </div>
+
+                <p class="form-note">Los campos marcados con * son obligatorios</p>
+            </form>
+
+            <!-- Mensaje de Confirmación -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h2>¡Gracias por tu propuesta!</h2>
+                <p>Hemos recibido tu solicitud. Nos pondremos en contacto contigo en los próximos días.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
+        <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>
+                    </div>
+                </fieldset>
+
+                <!-- Botones de Envío -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Enviar Propuesta</button>
+                    <button type="reset" class="btn-reset">Limpiar Formulario</button>
+                </div>
+
+                <p class="form-note">Los campos marcados con * son obligatorios</p>
+            </form>
+
+            <!-- Mensaje de Confirmación -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h2>¡Gracias por tu propuesta!</h2>
+                <p>Hemos recibido tu solicitud. Nos pondremos en contacto contigo en los próximos días.</p>
+            </div>
+        </section>
+    </main>
     <footer>
         <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
         <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
