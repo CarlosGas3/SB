@@ -7,19 +7,6 @@ const spotifyPlayer = () => {
     });
 }
 
-const DEFAULT_PRODUCT_IMAGE = "/assets/logoPNGwhite.png";
-
-function createImageElement(src, alt) {
-    const img = document.createElement("img");
-    img.src = src || DEFAULT_PRODUCT_IMAGE;
-    img.alt = alt || "Producto";
-    img.onerror = () => {
-        img.onerror = null;
-        img.src = DEFAULT_PRODUCT_IMAGE;
-    };
-    return img;
-}
-
 async function loadProductsVinsi() {
     try {
         const res = await fetch("/api/mock/products/vinsi");
@@ -32,18 +19,12 @@ async function loadProductsVinsi() {
             div.className = "product";
             let price = p.price ? p.price + "€" : "Este producto no está disponible por ahora.";
             let btnText = isNaN(p.price) ? "Ver producto" : "Añadir al carrito";
-            const imageUrl = p.images?.[0]?.url || DEFAULT_PRODUCT_IMAGE;
-
-            const image = createImageElement(imageUrl, p.name);
-            const title = document.createElement("h3");
-            title.textContent = p.name;
-            const priceEl = document.createElement("p");
-            priceEl.textContent = price;
-            const button = document.createElement("button");
-            button.textContent = btnText;
-            button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
-
-            div.append(image, title, priceEl, button);
+            div.innerHTML = `
+                    <img src="${p.images[0].url}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <p>${price}</p>
+                    <button onclick="window.open('https://www.vinsi72.com${p.url}', '_blank')">${btnText}</button>
+                    `;
             container.appendChild(div);
         });
     } catch (error) {
@@ -66,23 +47,25 @@ async function loadProductsBose() {
             div.className = "product";
 
             const variant = p.variants?.[0];
+
             const price = variant?.price
                 ? variant.price + "€"
                 : "Este producto no está disponible por ahora.";
+
             const btnText = variant?.price ? "Añadir al carrito" : "Ver producto";
-            const imgSrc = p.images?.[0]?.src || variant?.featured_image?.src || DEFAULT_PRODUCT_IMAGE;
+
+            const imgSrc = p.images?.[0]?.src || "";
+
             const productUrl = `https://bosecondieresis.net/products/${p.handle}`;
 
-            const image = createImageElement(imgSrc, p.title);
-            const title = document.createElement("h3");
-            title.textContent = p.title;
-            const priceEl = document.createElement("p");
-            priceEl.textContent = price;
-            const button = document.createElement("button");
-            button.textContent = btnText;
-            button.addEventListener("click", () => window.open(productUrl, "_blank"));
-
-            div.append(image, title, priceEl, button);
+            div.innerHTML = `
+                <img src="${imgSrc}" alt="${p.title}">
+                <h3>${p.title}</h3>
+                <p>${price}</p>
+                <button onclick="window.open('${productUrl}', '_blank')">
+                    ${btnText}
+                </button>
+            `;
             container.appendChild(div);
         });
     } catch (error) {

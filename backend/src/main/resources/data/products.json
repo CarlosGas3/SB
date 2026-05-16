@@ -1,0 +1,26 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Auriculares inalámbricos",
+    "description": "Auriculares confortables con cancelación de ruido.",
+    "price": 89.99,
+    "imageUrl": "https://via.placeholder.com/250x250?text=Auriculares",
+    "stock": 12
+  },
+  {
+    "id": "prod-2",
+    "name": "Altavoz Bluetooth",
+    "description": "Altavoz portátil con 10 horas de reproducción.",
+    "price": 59.99,
+    "imageUrl": "https://via.placeholder.com/250x250?text=Altavoz",
+    "stock": 8
+  },
+  {
+    "id": "prod-3",
+    "name": "Tarjeta de regalo",
+    "description": "Regala música y experiencia de compra.",
+    "price": 25.0,
+    "imageUrl": "https://via.placeholder.com/250x250?text=Gift",
+    "stock": 100
+  }
+]
