@@ -9,6 +9,64 @@ const spotifyPlayer = () => {
 
 const DEFAULT_PRODUCT_IMAGE = "/assets/logoPNGwhite.png";
 
+// --- Cart helpers (store in localStorage under 'cart') ---
+function getCart() {
+    try {
+        const raw = localStorage.getItem('cart');
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+}
+
+function addToCart(item) {
+    const cart = getCart();
+    const existing = cart.find(i => i.productId === item.productId && i.size === item.size);
+    if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+        cart.push({ ...item, quantity: 1 });
+    }
+    saveCart(cart);
+}
+
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCartCount();
+}
+
+function updateCartCount() {
+    const cart = getCart();
+    const count = cart.reduce((s, it) => s + (it.quantity || 0), 0);
+    const el = document.getElementById('cartCount');
+    if (el) el.textContent = count > 0 ? `(${count})` : '';
+}
+
+function showTempMessage(text, timeout = 1500) {
+    let el = document.getElementById('tempMessage');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'tempMessage';
+        el.style.position = 'fixed';
+        el.style.right = '20px';
+        el.style.bottom = '20px';
+        el.style.background = '#1b5e20';
+        el.style.color = '#fff';
+        el.style.padding = '10px 14px';
+        el.style.borderRadius = '6px';
+        el.style.zIndex = '9999';
+        document.body.appendChild(el);
+    }
+    el.textContent = text;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', timeout);
+}
+
 function createImageElement(src, alt) {
     const img = document.createElement("img");
     img.src = src || DEFAULT_PRODUCT_IMAGE;
@@ -49,7 +107,19 @@ async function loadProductsVinsi() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+            if (!isNaN(p.price) && p.price !== null && p.price !== undefined) {
+                button.addEventListener("click", () => {
+                    addToCart({
+                        productId: p.id || p.url || p.name,
+                        name: p.name,
+                        unitPrice: parseFloat(p.price),
+                        size: null
+                    });
+                    showTempMessage("Producto añadido al carrito");
+                });
+            } else {
+                button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+            }
 
             div.append(image, title, priceEl, button);
             container.appendChild(div);
@@ -95,7 +165,19 @@ async function loadProductsBose() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            button.addEventListener("click", () => window.open(productUrl, "_blank"));
+            if (variant?.price) {
+                button.addEventListener("click", () => {
+                    addToCart({
+                        productId: p.handle || p.id || p.title,
+                        name: p.title,
+                        unitPrice: parseFloat(variant.price),
+                        size: null
+                    });
+                    showTempMessage("Producto añadido al carrito");
+                });
+            } else {
+                button.addEventListener("click", () => window.open(productUrl, "_blank"));
+            }
 
             div.append(image, title, priceEl, button);
             container.appendChild(div);
@@ -113,20 +195,15 @@ const _setupCrossfade = (img) => {
     img.parentNode.insertBefore(wrap, img);
     wrap.appendChild(img);
 
-    // overlay = capa superior (frente); img = capa inferior (fondo, siempre opacity:1)
-    // Solo se anima la capa superior 1→0, evitando el oscurecimiento por compositing
     const overlay = document.createElement("img");
     overlay.alt = img.alt;
     overlay.src = img.src;
     wrap.appendChild(overlay);
 
     return (newSrc) => {
-        // Cargar nueva imagen en el fondo (oculta bajo el frente)
         img.src = newSrc;
-        // Desvanecer el frente para revelar el fondo → crossfade sin oscurecimiento
         overlay.style.opacity = "0";
         setTimeout(() => {
-            // Restaurar el frente instantáneamente al nuevo src (sin transición visible)
             overlay.src = newSrc;
             overlay.style.transition = "none";
             overlay.style.opacity = "1";
@@ -171,7 +248,6 @@ const cambiarImagenIndie = () => {
     }, 2500);
 };
 
-// ===== FORMULARIO DE CONTACTO =====
 const initContactForm = () => {
     const form = document.getElementById("contactForm");
     const artistInfoFieldset = document.getElementById("artistInfo");
@@ -179,21 +255,18 @@ const initContactForm = () => {
     const userTypeRadios = document.querySelectorAll('input[name="userType"]');
     const successMessage = document.getElementById("successMessage");
 
-    // Mostrar/ocultar campos según el tipo de usuario
     const updateFormFieldsVisibility = () => {
         const selectedType = document.querySelector('input[name="userType"]:checked')?.value;
 
         if (selectedType === "artist") {
             artistInfoFieldset.style.display = "block";
             brandInfoFieldset.style.display = "none";
-            // Marcar campos de artista como requeridos
             document.getElementById("artistName").required = true;
             document.getElementById("genre").required = true;
             document.getElementById("bio").required = true;
         } else if (selectedType === "brand") {
             artistInfoFieldset.style.display = "none";
             brandInfoFieldset.style.display = "block";
-            // Marcar campos de marca como requeridos
             document.getElementById("companyName").required = true;
             document.getElementById("industry").required = true;
             document.getElementById("brandBio").required = true;
@@ -203,23 +276,19 @@ const initContactForm = () => {
         }
     };
 
-    // Event listeners para cambiar tipo de usuario
     userTypeRadios.forEach(radio => {
         radio.addEventListener("change", updateFormFieldsVisibility);
     });
 
-    // Validación y envío del formulario
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Validar que se seleccionar tipo de usuario
         const selectedType = document.querySelector('input[name="userType"]:checked');
         if (!selectedType) {
             alert("Por favor, selecciona el tipo de usuario.");
             return;
         }
 
-        // Validar al menos una opción de colaboración
         const collaborationCheckboxes = document.querySelectorAll('input[name="collaborationType"]');
         const anyCollaborationSelected = Array.from(collaborationCheckboxes).some(cb => cb.checked);
         if (!anyCollaborationSelected) {
@@ -227,11 +296,10 @@ const initContactForm = () => {
             return;
         }
 
-        // Validar archivo (si lo hay)
         const fileInput = document.getElementById("files");
         if (fileInput.files.length > 0) {
             for (let file of fileInput.files) {
-                if (file.size > 10 * 1024 * 1024) { // 10MB
+                if (file.size > 10 * 1024 * 1024) {
                     alert(`El archivo "${file.name}" supera el tamaño máximo de 10MB.`);
                     return;
                 }
@@ -242,17 +310,13 @@ const initContactForm = () => {
             }
         }
 
-        // Si todas las validaciones pasan, mostrar mensaje de éxito
-        // En un caso real, aquí enviarías los datos al servidor
         console.log("Formulario válido. Datos listos para enviar:");
         const formData = new FormData(form);
         console.log(Object.fromEntries(formData));
 
-        // Ocultar formulario y mostrar mensaje de éxito
         form.style.display = "none";
         successMessage.style.display = "block";
 
-        // Opcional: Recargar después de 5 segundos
         setTimeout(() => {
             form.reset();
             form.style.display = "block";
@@ -260,7 +324,6 @@ const initContactForm = () => {
         }, 5000);
     });
 
-    // Mostrar contador de caracteres en los textareas
     const textareas = document.querySelectorAll("textarea");
     textareas.forEach(textarea => {
         textarea.addEventListener("input", () => {
@@ -271,10 +334,76 @@ const initContactForm = () => {
     });
 };
 
+const initAuthForms = () => {
+    const authMessage = document.getElementById("authMessage");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    const showAuthMessage = (message, success) => {
+        if (!authMessage) return;
+        authMessage.textContent = message;
+        authMessage.style.color = success ? "#1b5e20" : "#b71c1c";
+        authMessage.style.display = "block";
+    };
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+            const result = await response.json();
+            if (response.ok && result.success) {
+                showAuthMessage("Login correcto", true);
+                setTimeout(() => window.location.href = 'inicio.html', 700);
+            } else {
+                showAuthMessage(result.message || "Usuario o contraseña incorrectos", false);
+            }
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const nombre = document.getElementById("regNombre").value.trim();
+            const apellido = document.getElementById("regApellido").value.trim();
+            const email = document.getElementById("regEmail").value.trim();
+            const password = document.getElementById("regPassword").value.trim();
+            const telefono = document.getElementById("regTelefono").value.trim();
+
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: `${nombre} ${apellido}`,
+                    email,
+                    password,
+                    phone: telefono
+                })
+            });
+            const result = await response.json();
+            if (response.ok && result.success) {
+                showAuthMessage("Cuenta creada correctamente", true);
+                registerForm.reset();
+                setTimeout(() => window.location.href = 'inicio.html', 700);
+            } else {
+                showAuthMessage(result.message || "Error creando la cuenta", false);
+            }
+        });
+    }
+};
+
 // Inicializar el formulario cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("contactForm")) {
         initContactForm();
     }
+    if (document.getElementById("loginForm") || document.getElementById("registerForm")) {
+        initAuthForms();
+    }
 });
-

@@ -17,7 +17,72 @@
             <li><a href="iniciarSesion.html"><img src="../assets/usuario.png" alt="Contacto" class="icono"></a></li>
         </ul>
     </header>
-    <main></main>
+    <main>
+        <section class="cart">
+            <h2>Tu carrito</h2>
+            <div id="cartList"></div>
+            <div id="cartSummary">
+                <p id="cartTotal">Total: 0€</p>
+                <button id="checkoutButton">Proceder al pago</button>
+                <button id="clearCartButton">Vaciar carrito</button>
+            </div>
+        </section>
+        <script src="../js/scripts.js"></script>
+        <script>
+            // render cart contents
+            function renderCart() {
+                const cart = getCart();
+                const list = document.getElementById('cartList');
+                list.innerHTML = '';
+                if (cart.length === 0) {
+                    list.innerHTML = '<p>El carrito está vacío.</p>';
+                    document.getElementById('cartTotal').textContent = 'Total: 0€';
+                    return;
+                }
+                let total = 0;
+                cart.forEach((item, idx) => {
+                    const row = document.createElement('div');
+                    row.className = 'cart-row';
+                    const name = document.createElement('div');
+                    name.textContent = item.name || 'Producto';
+                    const qty = document.createElement('input');
+                    qty.type = 'number';
+                    qty.min = '1';
+                    qty.value = item.quantity || 1;
+                    qty.addEventListener('change', (e) => {
+                        const v = parseInt(e.target.value) || 1;
+                        item.quantity = v;
+                        saveCart(cart);
+                        renderCart();
+                    });
+                    const price = document.createElement('div');
+                    price.textContent = (item.unitPrice || 0).toFixed(2) + '€';
+                    const remove = document.createElement('button');
+                    remove.textContent = 'Eliminar';
+                    remove.addEventListener('click', () => {
+                        cart.splice(idx, 1);
+                        saveCart(cart);
+                        renderCart();
+                    });
+                    row.append(name, qty, price, remove);
+                    list.appendChild(row);
+                    total += (item.unitPrice || 0) * (item.quantity || 1);
+                });
+                document.getElementById('cartTotal').textContent = 'Total: ' + total.toFixed(2) + '€';
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                renderCart();
+                document.getElementById('checkoutButton').addEventListener('click', () => {
+                    window.location.href = 'checkout.html';
+                });
+                document.getElementById('clearCartButton').addEventListener('click', () => {
+                    clearCart();
+                    renderCart();
+                });
+            });
+        </script>
+    </main>
     <footer>
         <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
         <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>

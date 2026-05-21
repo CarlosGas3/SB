@@ -3,8 +3,10 @@ package com.example.demo.model;
 public class PurchaseItem {
     private String productId;
     private String productName;
+    private String size;
     private int quantity;
     private double unitPrice;
+    private double totalPrice;
 
     public PurchaseItem() {
     }
@@ -25,6 +27,14 @@ public class PurchaseItem {
         this.productName = productName;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -39,5 +49,13 @@ public class PurchaseItem {
 
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

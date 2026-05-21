@@ -9,6 +9,64 @@ const spotifyPlayer = () => {
 
 const DEFAULT_PRODUCT_IMAGE = "/assets/logoPNGwhite.png";
 
+// --- Cart helpers (store in localStorage under 'cart') ---
+function getCart() {
+    try {
+        const raw = localStorage.getItem('cart');
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+}
+
+function addToCart(item) {
+    const cart = getCart();
+    const existing = cart.find(i => i.productId === item.productId && i.size === item.size);
+    if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+        cart.push({ ...item, quantity: 1 });
+    }
+    saveCart(cart);
+}
+
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCartCount();
+}
+
+function updateCartCount() {
+    const cart = getCart();
+    const count = cart.reduce((s, it) => s + (it.quantity || 0), 0);
+    const el = document.getElementById('cartCount');
+    if (el) el.textContent = count > 0 ? `(${count})` : '';
+}
+
+function showTempMessage(text, timeout = 1500) {
+    let el = document.getElementById('tempMessage');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'tempMessage';
+        el.style.position = 'fixed';
+        el.style.right = '20px';
+        el.style.bottom = '20px';
+        el.style.background = '#1b5e20';
+        el.style.color = '#fff';
+        el.style.padding = '10px 14px';
+        el.style.borderRadius = '6px';
+        el.style.zIndex = '9999';
+        document.body.appendChild(el);
+    }
+    el.textContent = text;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', timeout);
+}
+
 function createImageElement(src, alt) {
     const img = document.createElement("img");
     img.src = src || DEFAULT_PRODUCT_IMAGE;
@@ -49,7 +107,19 @@ async function loadProductsVinsi() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+            if (!isNaN(p.price) && p.price !== null && p.price !== undefined) {
+                button.addEventListener("click", () => {
+                    addToCart({
+                        productId: p.id || p.url || p.name,
+                        name: p.name,
+                        unitPrice: parseFloat(p.price),
+                        size: null
+                    });
+                    showTempMessage("Producto añadido al carrito");
+                });
+            } else {
+                button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+            }
 
             div.append(image, title, priceEl, button);
             container.appendChild(div);
@@ -95,7 +165,19 @@ async function loadProductsBose() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            button.addEventListener("click", () => window.open(productUrl, "_blank"));
+            if (variant?.price) {
+                button.addEventListener("click", () => {
+                    addToCart({
+                        productId: p.handle || p.id || p.title,
+                        name: p.title,
+                        unitPrice: parseFloat(variant.price),
+                        size: null
+                    });
+                    showTempMessage("Producto añadido al carrito");
+                });
+            } else {
+                button.addEventListener("click", () => window.open(productUrl, "_blank"));
+            }
 
             div.append(image, title, priceEl, button);
             container.appendChild(div);
@@ -271,10 +353,78 @@ const initContactForm = () => {
     });
 };
 
+const initAuthForms = () => {
+    const authMessage = document.getElementById("authMessage");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+            if (response.ok && result.success) {
+                showAuthMessage("Login correcto", true);
+            } else {
+                showAuthMessage(result.message || "Usuario o contraseña incorrectos", false);
+            }
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const nombre = document.getElementById("regNombre").value.trim();
+            const apellido = document.getElementById("regApellido").value.trim();
+            const email = document.getElementById("regEmail").value.trim();
+            const password = document.getElementById("regPassword").value.trim();
+            const telefono = document.getElementById("regTelefono").value.trim();
+
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: `${nombre} ${apellido}`,
+                    email,
+                    password,
+                    phone: telefono
+                })
+            });
+
+            const result = await response.json();
+            if (response.ok && result.success) {
+                showAuthMessage("Cuenta creada correctamente", true);
+                registerForm.reset();
+                setTimeout(() => window.location.href = 'inicio.html', 700);
+            } else {
+                showAuthMessage(result.message || "Error creando la cuenta", false);
+            }
+        });
+    }
+
+    function showAuthMessage(message, success) {
+        if (!authMessage) return;
+        authMessage.textContent = message;
+        authMessage.style.color = success ? "#1b5e20" : "#b71c1c";
+        authMessage.style.display = "block";
+    }
+};
+
 // Inicializar el formulario cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("contactForm")) {
         initContactForm();
+    }
+    if (document.getElementById("loginForm") || document.getElementById("registerForm")) {
+        initAuthForms();
     }
 });
 

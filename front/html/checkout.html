@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowBan - Checkout</title>
+    <link rel="stylesheet" href="../css/carrito.css">
+</head>
+
+<body>
+    <header>
+        <a href="inicio.html"><img src="../assets/logoPNGpurple.png" alt="Logo de ShadowBan" id="logo"></a>
+        <ul>
+            <li><a href="contacto.html"><img src="../assets/info.png" alt="Contacto" class="icono"></a></li>
+            <li><a href="carrito.html"><img src="../assets/carrito.png" alt="Carrito" class="icono"></a></li>
+            <li><a href="iniciarSesion.html"><img src="../assets/usuario.png" alt="Contacto" class="icono"></a></li>
+        </ul>
+    </header>
+    <main>
+        <h2>Resumen de la compra</h2>
+        <div id="checkoutList"></div>
+        <p id="checkoutTotal">Total: 0€</p>
+        <form id="checkoutForm">
+            <h3>Datos de contacto y envío</h3>
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+            <label for="name">Nombre completo</label>
+            <input type="text" id="name" name="name" required>
+            <label for="address">Dirección</label>
+            <input type="text" id="address" name="address">
+            <label for="city">Ciudad</label>
+            <input type="text" id="city" name="city">
+            <label for="country">País</label>
+            <input type="text" id="country" name="country">
+            <button type="submit">Confirmar compra</button>
+        </form>
+    </main>
+    <footer>
+        <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
+        <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/scripts.js"></script>
+    <script>
+        function renderCheckout() {
+            const cart = getCart();
+            const list = document.getElementById('checkoutList');
+            list.innerHTML = '';
+            if (cart.length === 0) {
+                list.innerHTML = '<p>El carrito está vacío.</p>';
+                document.getElementById('checkoutTotal').textContent = 'Total: 0€';
+                return;
+            }
+            let total = 0;
+            cart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'checkout-row';
+                row.textContent = `${item.name} x ${item.quantity} - ${(item.unitPrice || 0).toFixed(2)}€`;
+                list.appendChild(row);
+                total += (item.unitPrice || 0) * (item.quantity || 1);
+            });
+            document.getElementById('checkoutTotal').textContent = 'Total: ' + total.toFixed(2) + '€';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCheckout();
+            document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const cart = getCart();
+                if (cart.length === 0) {
+                    alert('El carrito está vacío');
+                    return;
+                }
+                const email = document.getElementById('email').value.trim();
+                const purchaseItems = cart.map(i => ({ productId: i.productId, size: i.size, quantity: i.quantity }));
+                const payload = { email, items: purchaseItems };
+                try {
+                    const res = await fetch('/api/purchases', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await res.json();
+                    if (res.ok && result.success) {
+                        clearCart();
+                        window.location.href = 'order-success.html';
+                    } else {
+                        alert(result.message || 'Error creando la compra');
+                    }
+                } catch (err) {
+                    alert('Error conectando con el servidor');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

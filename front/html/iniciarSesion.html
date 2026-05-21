@@ -20,14 +20,14 @@
     <main>
         <article id="iniciarSesion">
             <h2>Iniciar sesión</h2>
-            <form>
-                <label for="email">Correo electrónico:</label>
-                <input type="text" id="email" name="email" required>
+            <form id="loginForm">
+                <label for="loginEmail">Correo electrónico:</label>
+                <input type="email" id="loginEmail" name="loginEmail" required>
 
-                <label for="passw">Contraseña:</label>
-                <input type="passw" id="passw" name="passw" required>
+                <label for="loginPassword">Contraseña:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
 
-                <button type="submit" id="iniciarSesion">Iniciar sesión</button>
+                <button type="submit" id="loginButton">Iniciar sesión</button>
             </form>
         </article>
         <article id="registrarse">
@@ -35,27 +35,28 @@
                 <summary>
                     <h2>Crear cuenta</h2>
                 </summary>
-                <form>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                <form id="registerForm">
+                    <label for="regNombre">Nombre:</label>
+                    <input type="text" id="regNombre" name="regNombre" required>
 
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
+                    <label for="regApellido">Apellido:</label>
+                    <input type="text" id="regApellido" name="regApellido" required>
 
-                    <label for="passw">Contraseña:</label>
-                    <input type="password" id="passw" name="passw" required>
+                    <label for="regPassword">Contraseña:</label>
+                    <input type="password" id="regPassword" name="regPassword" required>
 
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="regEmail">Correo electrónico:</label>
+                    <input type="email" id="regEmail" name="regEmail" required>
 
-                    <label for="telefono">Número de teléfono:</label>
-                    <input type="number" id="telefono" name="telefono" required>
+                    <label for="regTelefono">Número de teléfono:</label>
+                    <input type="tel" id="regTelefono" name="regTelefono" required>
 
-                    <label for="fecha">Fecha de nacimiento:</label>
-                    <input type="date" id="fecha" name="fecha" required>
+                    <label for="regFecha">Fecha de nacimiento:</label>
+                    <input type="date" id="regFecha" name="regFecha" required>
 
-                    <button type="submit" id="registrarse">Crear cuenta</button>
+                    <button type="submit" id="registerButton">Crear cuenta</button>
                 </form>
+                <div id="authMessage" class="auth-message"></div>
             </details>
         </article>
 
@@ -64,6 +65,7 @@
         <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
         <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
     </footer>
+    <script src="../js/scripts.js"></script>
 </body>
 
 </html>

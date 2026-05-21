@@ -3,9 +3,18 @@ server:
 app:
   data-dir: data
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/shadow_ban?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1234
   jackson:
     serialization:
       write-dates-as-timestamps: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
   mail:
     host: ${MAIL_HOST:}
     port: ${MAIL_PORT:25}
@@ -14,3 +23,9 @@ spring:
     properties:
       [mail.smtp.auth]: ${MAIL_SMTP_AUTH:false}
       [mail.smtp.starttls.enable]: ${MAIL_SMTP_STARTTLS:false}
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure.sql: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.springframework.boot.autoconfigure.jdbc: DEBUG
