@@ -1,47 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Syne:wght@600;700;800&display=swap");
+@import url("global.css");
 
-:root {
-    --bg-main: #060708;
-    --text-main: #edf3ff;
-    --text-soft: #b6bfd1;
-    --line: rgba(255, 255, 255, 0.15);
-    --card: rgba(255, 255, 255, 0.03);
-}
-
-* {
-    box-sizing: border-box;
-}
-
+/* ─── Body override (mini embedded player, no full-page layout) ── */
 body {
-    min-height: 100vh;
-    margin: 0;
+    min-height: unset;
+    display: block;
     padding: clamp(16px, 3vw, 24px);
-    font-family: "Manrope", sans-serif;
-    color: var(--text-main);
-    background: radial-gradient(circle at 50% -10%, rgba(180, 220, 255, 0.14), transparent 35%), var(--bg-main);
 }
 
+/* ─── Container ──────────────────────────────────────────────────── */
 .container {
     max-width: 860px;
     margin: 0 auto;
     text-align: center;
     padding: clamp(18px, 2.5vw, 28px);
-    border-radius: 22px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--line);
-    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--card));
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
 }
 
+/* ─── Heading ────────────────────────────────────────────────────── */
 h1 {
-    margin: 0;
     font-family: "Syne", sans-serif;
     font-size: clamp(1.4rem, 3.4vw, 2.2rem);
     line-height: 1.05;
+    letter-spacing: -0.02em;
     color: transparent;
-    background: linear-gradient(90deg, #d8f2ff 10%, #90c5ff 45%, #e6e8f8 88%);
+    background: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
     -webkit-background-clip: text;
     background-clip: text;
 }
 
+/* ─── Artist Selector ────────────────────────────────────────────── */
 .artist-selector {
     margin: 20px 0;
     display: flex;
@@ -54,13 +43,15 @@ h1 {
 select {
     width: min(360px, 100%);
     min-height: 44px;
-    padding: 8px 12px;
-    font-size: 0.98rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-family: "Manrope", sans-serif;
+    border-radius: var(--radius-input);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--input-bg);
     color: var(--text-main);
     outline: none;
+    transition: border-color var(--ease), box-shadow var(--ease);
 }
 
 select:focus {
@@ -68,6 +59,7 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(118, 175, 255, 0.22);
 }
 
+/* ─── Player ─────────────────────────────────────────────────────── */
 .spotify-player {
     margin-top: 18px;
 }

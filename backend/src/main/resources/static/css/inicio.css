@@ -1,149 +1,89 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Syne:wght@600;700;800&display=swap");
+@import url("global.css");
 
-:root {
-    --bg-main: #060708;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --text-main: #edf3ff;
-    --text-soft: #b6bfd1;
-    --line: rgba(255, 255, 255, 0.15);
-    --cta-bg: #f3f5f8;
-    --cta-text: #111319;
-    --shadow-glow: rgba(139, 201, 255, 0.35);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    background: radial-gradient(circle at 50% -10%, rgba(180, 220, 255, 0.14), transparent 35%),
-        var(--bg-main);
-    color: var(--text-main);
-    font-family: "Manrope", sans-serif;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(250, 250, 255, 0.95) 0%, rgba(148, 187, 255, 0.28) 45%, transparent 72%);
-    box-shadow: 0 0 28px rgba(190, 217, 255, 0.35);
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Header */
-header {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 28px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.35));
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-header ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-header #logo {
-    width: 112px;
-    height: 112px;
-    object-fit: contain;
-}
-
-.icono {
-    width: 38px;
-    height: 38px;
-    padding: 7px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    transition: transform 0.25s ease, background-color 0.25s ease;
-}
-
-.icono:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.13);
-}
-
-/* Main */
+/* ─── Main: card grid ────────────────────────────────────────────── */
 main {
+    flex: 1;
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 960px;
+    width: 100%;
     margin: 0 auto;
-    min-height: calc(100vh - 250px);
-    padding: clamp(28px, 6vw, 72px) 20px 100px;
+    padding: clamp(20px, 4vw, 48px) 20px 56px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: clamp(20px, 3.6vw, 36px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.8vw, 28px);
     align-items: start;
 }
 
-main::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 18% 22%, rgba(132, 190, 255, 0.12), transparent 40%),
-        radial-gradient(circle at 78% 20%, rgba(195, 176, 255, 0.1), transparent 35%);
-    pointer-events: none;
+/* CTA card always spans full width below the product cards */
+main > .container:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(520px, 100%);
 }
 
+/* ─── Cards ──────────────────────────────────────────────────────── */
 .container {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
-    padding: clamp(18px, 2.5vw, 28px);
-    border-radius: 28px;
+    gap: 16px;
+    padding: clamp(14px, 2vw, 22px);
+    border-radius: var(--radius-card);
     background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
     border: 1px solid var(--line);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 26px rgba(133, 187, 255, 0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
 .container h2 {
     font-family: "Syne", sans-serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 0.95;
+    font-size: clamp(1.1rem, 2.4vw, 1.9rem);
+    line-height: 1;
     letter-spacing: -0.03em;
     text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
     color: transparent;
-    background: linear-gradient(90deg, #ffffff 8%, #ae90ff 45%, #490ea8 85%);
+    background: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
     -webkit-background-clip: text;
     background-clip: text;
 }
 
 .container img {
-    width: min(100%, 420px);
+    width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 24px;
+    border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 26px 45px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+.img-crossfade-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+}
+
+.img-crossfade-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    transition: opacity 0.65s ease;
 }
 
 .container a {
@@ -152,133 +92,19 @@ main::before {
     justify-content: center;
 }
 
-button {
-    width: min(100%, 290px);
-    min-height: 52px;
-    border: 0;
-    border-radius: 999px;
-    background: var(--cta-bg);
-    color: var(--cta-text);
-    font-family: "Syne", sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
-    box-shadow: 0 10px 22px rgba(240, 246, 255, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-}
-
-button:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.02);
-    box-shadow: 0 16px 28px var(--shadow-glow), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-/* Reproductor Spotify */
-#spotify {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.48);
-}
-
-#overlay {
-    position: fixed;
-    right: 108px;
-    bottom: 20px;
-    width: min(500px, calc(100vw - 140px));
-    height: 250px;
-    background: #121417;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    display: none;
-    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.48);
-    z-index: 999;
-    overflow: hidden;
-}
-
-iframe {
+.container button {
     width: 100%;
-    height: 100%;
-    border: none;
+    max-width: 280px;
 }
 
-/* Footer */
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 10px 26px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(0, 0, 0, 0.82);
-}
-
-footer #logo {
-    width: 82px;
-    height: 82px;
-    object-fit: contain;
-}
-
-footer p {
-    color: var(--text-soft);
-    font-size: 0.95rem;
-}
-
-@media (max-width: 880px) {
-    header {
-        padding: 10px 16px;
-    }
-
-    header #logo {
-        width: 92px;
-        height: 92px;
-    }
-
-    .icono {
-        width: 34px;
-        height: 34px;
-    }
-
-    main {
-        padding-top: 26px;
-        padding-bottom: 88px;
-    }
-
-    #overlay {
-        right: 20px;
-        bottom: 112px;
-        width: calc(100vw - 40px);
-    }
-
-    footer {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding: 12px 16px;
-    }
-}
-
-@media (max-width: 520px) {
+@media (max-width: 600px) {
     main {
         grid-template-columns: 1fr;
     }
 
-    .container {
-        border-radius: 22px;
-        padding: 16px;
-    }
-
-    button {
+    main > .container:nth-child(3) {
+        grid-column: unset;
+        justify-self: unset;
         width: 100%;
     }
 }
