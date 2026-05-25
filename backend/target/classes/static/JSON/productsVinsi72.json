@@ -1,0 +1,1356 @@
+[
+  {
+    "id": 115260114,
+    "name": "★ TARGET RANGLAN TEE",
+    "permalink": "target-ranglan-tee",
+    "position": 1,
+    "url": "/product/target-ranglan-tee",
+    "status": "coming-soon",
+    "created_at": "2025-09-14T08:43:52.000Z",
+    "has_password_protection": true,
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410661000/ecom_targettee_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410661000/ecom_targettee_1.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ]
+  },
+  {
+    "id": 113157921,
+    "name": "★ TARGET TRUCKER CAP",
+    "permalink": "shooter-trucker-cap",
+    "position": 2,
+    "url": "/product/shooter-trucker-cap",
+    "status": "coming-soon",
+    "created_at": "2025-04-29T18:23:42.000Z",
+    "has_password_protection": true,
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643060/ecom_aimtrucker_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643060/ecom_aimtrucker_1.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ]
+  },
+  {
+    "id": 112051599,
+    "name": "★ PINK MULTIMOJI .925 BRACELET LINK",
+    "permalink": "multimoji-925-bracelet-link",
+    "position": 3,
+    "price": 60,
+    "default_price": 60,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/multimoji-925-bracelet-link",
+    "status": "active",
+    "created_at": "2025-02-21T14:24:14.000Z",
+    "description": "★ Otaku Is Dead  \"multimoji bracelet link\"\r\n\r\n.925 sterling silver\r\navailable in 16cm/17.5cm/19cm\r\n\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 449602950,
+        "name": "16.0 cm",
+        "price": 60,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 449602947,
+        "name": "17.5 cm",
+        "price": 60,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 449602953,
+        "name": "19.0 cm",
+        "price": 60,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6.5,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 16.5,
+        "amount_with_others": 8.5,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 25.5,
+        "amount_with_others": 12.5,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      },
+      {
+        "amount_alone": 13.5,
+        "amount_with_others": 7
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410644197/ecom_multimoji_pink_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410644197/ecom_multimoji_pink_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410644191/ecom_multimoji_pink_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410644191/ecom_multimoji_pink_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410644194/ecom_multimoji_pink_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410644194/ecom_multimoji_pink_3.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410644200/ecom_multimoji_pink_4.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410644200/ecom_multimoji_pink_4.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864721,
+        "name": "★ accesories",
+        "permalink": "accesories",
+        "url": "/category/accesories"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 110037009,
+    "name": "★ RANGLAN HOODIE BLUE",
+    "permalink": "ranglan-hoodie-blue",
+    "position": 4,
+    "price": 50,
+    "default_price": 50,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/ranglan-hoodie-blue",
+    "status": "active",
+    "created_at": "2024-10-28T11:28:07.000Z",
+    "description": "★ \"otaku is dead\" Ranglan Hoodie Blue\r\n\r\n400 gsm\r\nVynil front graphic \r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 440579130,
+        "name": "S",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440579133,
+        "name": "M",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440579136,
+        "name": "L",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440579139,
+        "name": "XL",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6.4,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 16,
+        "amount_with_others": 10,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 26,
+        "amount_with_others": 15,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642706/ecom_hoodie_blue_1_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642706/ecom_hoodie_blue_1_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642709/ecom_hoodie_blue_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642709/ecom_hoodie_blue_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410638155/ecom_hoodie_blue_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410638155/ecom_hoodie_blue_3.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864718,
+        "name": "★ hoodies",
+        "permalink": "hoodies",
+        "url": "/category/hoodies"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 110030205,
+    "name": "★ RANGLAN HOODIE PINK",
+    "permalink": "ranglan-hoodie-pink",
+    "position": 5,
+    "price": 50,
+    "default_price": 50,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/ranglan-hoodie-pink",
+    "status": "active",
+    "created_at": "2024-10-27T21:51:56.000Z",
+    "description": "★ \"otaku is dead\" Ranglan Hoodie Black\r\n\r\n400 gsm\r\nVinyl front graphic \r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 440550087,
+        "name": "S",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550090,
+        "name": "M",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550093,
+        "name": "L",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550096,
+        "name": "XL",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6.4,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 16,
+        "amount_with_others": 10,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 26,
+        "amount_with_others": 15,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642535/ecom_hoodie_pink_1_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642535/ecom_hoodie_pink_1_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642574/ecom_hoodie_pink_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642574/ecom_hoodie_pink_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410638311/ecom_hoodie_pink_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410638311/ecom_hoodie_pink_3.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864718,
+        "name": "★ hoodies",
+        "permalink": "hoodies",
+        "url": "/category/hoodies"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 110030190,
+    "name": "★ RANGLAN HOODIE BLACK",
+    "permalink": "ranglan-hoodie-black",
+    "position": 6,
+    "price": 50,
+    "default_price": 50,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/ranglan-hoodie-black",
+    "status": "active",
+    "created_at": "2024-10-27T21:51:01.000Z",
+    "description": "★ \"otaku is dead\" Ranglan Hoodie Black\r\n\r\n400 gsm\r\nVinyl front graphic \r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 440550039,
+        "name": "S",
+        "price": 50,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550042,
+        "name": "M",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550045,
+        "name": "L",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 440550048,
+        "name": "XL",
+        "price": 50,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6.4,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 16,
+        "amount_with_others": 10,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 26,
+        "amount_with_others": 15,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      },
+      {
+        "amount_alone": 25,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642526/ecom_hoodie_black_1_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642526/ecom_hoodie_black_1_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410642754/ecom_hoodie_black_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410642754/ecom_hoodie_black_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410637984/ecom_hoodie_black_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410637984/ecom_hoodie_black_3.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864718,
+        "name": "★ hoodies",
+        "permalink": "hoodies",
+        "url": "/category/hoodies"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 109994238,
+    "name": "★ REALTREE RHINESTONE CAMO CAP",
+    "permalink": "realtree-rhinestone-camo-cap",
+    "position": 7,
+    "price": 39,
+    "default_price": 39,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/realtree-rhinestone-camo-cap",
+    "status": "sold-out",
+    "created_at": "2024-10-25T16:21:40.000Z",
+    "description": "★ \"otaku is dead\" Realtree Rhinestone Camo Cap\r\n\r\nRhinestone skull patch\r\nDistressing all over the cap\r\n\r\nAll sales are final. No returns/refunds.\r\n",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 440381277,
+        "name": "Default",
+        "price": 39,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6,
+        "amount_with_others": 4,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 7,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 25,
+        "amount_with_others": 15
+      },
+      {
+        "amount_alone": 27,
+        "amount_with_others": 15,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410661216/ecom_realtreecap_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410661216/ecom_realtreecap_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410661366/ecom_realtreecap_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410661366/ecom_realtreecap_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410661363/ecom_realtreecap_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410661363/ecom_realtreecap_3.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/392793345/santa_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/392793345/santa_1.jpg",
+        "width": 6048,
+        "height": 4032
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864721,
+        "name": "★ accesories",
+        "permalink": "accesories",
+        "url": "/category/accesories"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 109994058,
+    "name": "★ PINK RHINESTONE CAMO CAP",
+    "permalink": "pink-rhinestone-camo-cap",
+    "position": 8,
+    "price": 39,
+    "default_price": 39,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/pink-rhinestone-camo-cap",
+    "status": "active",
+    "created_at": "2024-10-25T16:13:18.000Z",
+    "description": "★ \"otaku is dead\" Pink Rhinestone Camo Cap\r\n\r\nRhinestone skull patch\r\nDistressing all over the cap\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 440380455,
+        "name": "Default",
+        "price": 39,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 6,
+        "amount_with_others": 4,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 25,
+        "amount_with_others": 15
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 7,
+        "country": {
+          "id": 42,
+          "name": "United Kingdom",
+          "code": "GB"
+        }
+      },
+      {
+        "amount_alone": 27,
+        "amount_with_others": 17,
+        "country": {
+          "id": 43,
+          "name": "United States",
+          "code": "US"
+        }
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/412211739/ecom_pink_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/412211739/ecom_pink_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/412211742/ecom_pink_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/412211742/ecom_pink_2.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/412211745/ecom_pink_3.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/412211745/ecom_pink_3.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/392792730/santa_2.jpeg",
+        "secure_url": "https://assets.bigcartel.com/product_images/392792730/santa_2.jpeg",
+        "width": 6048,
+        "height": 4032
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864721,
+        "name": "★ accesories",
+        "permalink": "accesories",
+        "url": "/category/accesories"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 102916216,
+    "name": "★ MULTIMOJI .925 LINK BRACELET ",
+    "permalink": "multimoji-925-link-bracelet",
+    "position": 11,
+    "price": 65,
+    "default_price": 65,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/multimoji-925-link-bracelet",
+    "status": "active",
+    "created_at": "2023-10-23T21:34:53.000Z",
+    "description": "★ Otaku Is Dead  multimoji silver bracelet\r\n\r\n- .925 sterling silver\r\n- avaialble in 16cm/17.5cm/19cm\r\n\r\nThis item sale is on pre-order. Please be patient. Order will take in between 2-3 weeks to be completed\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 408874180,
+        "name": "17.5cm",
+        "price": 65,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 408874183,
+        "name": "19cm",
+        "price": 65,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 408874177,
+        "name": "16cm",
+        "price": 65,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5.5,
+        "amount_with_others": 4,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 14,
+        "amount_with_others": 8
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/370834051/bracelet_circle.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/370834051/bracelet_circle.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/370863913/bracelet_straight_web.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/370863913/bracelet_straight_web.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/370868185/bracelet_closeup_web.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/370868185/bracelet_closeup_web.png",
+        "width": 4000,
+        "height": 3000
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96350107,
+    "name": "★ PURPLE RUBBER TOY NECKLACE",
+    "permalink": "purple-rubber-toy-necklace",
+    "position": 15,
+    "price": 12,
+    "default_price": 12,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/purple-rubber-toy-necklace",
+    "status": "active",
+    "created_at": "2023-01-24T17:09:52.000Z",
+    "description": "★ Otaku Is Dead 22* skull necklace\r\n\r\n- Soft PVC rubber\r\n- White ball beaded chain\r\n- Interactive packaging \r\n- Check the \r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 383635645,
+        "name": "110cm",
+        "price": 12,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 383635648,
+        "name": "90cm",
+        "price": 12,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5.5,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/353380330/purp_closeup.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/353380330/purp_closeup.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355370554/purp_closeup_back.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355370554/purp_closeup_back.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/354804937/purp_full.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/354804937/purp_full.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355775083/nagui_accesories.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355775083/nagui_accesories.png",
+        "width": 4000,
+        "height": 3000
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96350086,
+    "name": "★ BLUE RUBBER TOY NECKLACE",
+    "permalink": "blue-rubber-toy-necklace",
+    "position": 16,
+    "price": 12,
+    "default_price": 12,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/blue-rubber-toy-necklace",
+    "status": "sold-out",
+    "created_at": "2023-01-24T17:08:46.000Z",
+    "description": "★ Otaku Is Dead 22* skull necklace\r\n\r\n- Soft PVC rubber\r\n- White ball beaded chain\r\n- Interactive packaging \r\n- Check the \r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 383635675,
+        "name": "90cm",
+        "price": 12,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 383635672,
+        "name": "110cm",
+        "price": 12,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5.5,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/353380267/blue_closeup.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/353380267/blue_closeup.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355370587/blue_closeup_back.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355370587/blue_closeup_back.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/354804913/blue_full.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/354804913/blue_full.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355775059/nagui_accesories.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355775059/nagui_accesories.png",
+        "width": 4000,
+        "height": 3000
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96349966,
+    "name": "★ BLACK RUBBER TOY NECKLACE",
+    "permalink": "black-rubber-toy-necklace",
+    "position": 17,
+    "price": 15,
+    "default_price": 15,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/black-rubber-toy-necklace",
+    "status": "sold-out",
+    "created_at": "2023-01-24T17:03:28.000Z",
+    "description": "★ Otaku Is Dead 22* skull necklace\r\n\r\n- Soft PVC rubber\r\n- White ball beaded chain\r\n- Interactive packaging \r\n- Check the \r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 383635693,
+        "name": "90cm",
+        "price": 15,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 383635690,
+        "name": "110cm",
+        "price": 15,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5.5,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 12,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/353379880/black_closeup.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/353379880/black_closeup.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355370569/black_closeup_back.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355370569/black_closeup_back.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/354804940/black_full.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/354804940/black_full.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355775047/dvamp_black_neck.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355775047/dvamp_black_neck.png",
+        "width": 4000,
+        "height": 3000
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96055681,
+    "name": "★ PURPLE SKULL LOGO TEE",
+    "permalink": "purple-skull-tee",
+    "position": 18,
+    "price": 28,
+    "default_price": 28,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/purple-skull-tee",
+    "status": "active",
+    "created_at": "2023-01-14T00:08:01.000Z",
+    "description": "★ Otaku Is Dead Skull Logo Tee\r\n\r\n100% soft cotton\r\n195 g/m²\r\nScreen-printed\r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 377332225,
+        "name": "XL",
+        "price": 28,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377332222,
+        "name": "L",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377332219,
+        "name": "M",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377332216,
+        "name": "S",
+        "price": 28,
+        "sold_out": true,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5,
+        "amount_with_others": 6,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643807/ecom_22_tee_purple_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643807/ecom_22_tee_purple_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643810/ecom_22_tee_purple_2_.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643810/ecom_22_tee_purple_2_.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96055579,
+    "name": "★ BLUE SKULL LOGO TEE",
+    "permalink": "blue-skull-tee",
+    "position": 19,
+    "price": 28,
+    "default_price": 28,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/blue-skull-tee",
+    "status": "active",
+    "created_at": "2023-01-14T00:04:02.000Z",
+    "description": "★ Otaku Is Dead Skull Logo Tee\r\n\r\n100% soft cotton\r\n195 g/m²\r\nScreen-printed\r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.\r\n",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 377331934,
+        "name": "L",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331937,
+        "name": "XL",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331928,
+        "name": "S",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331931,
+        "name": "M",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5,
+        "amount_with_others": 6,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643927/ecom_22_tee_blue_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643927/ecom_22_tee_blue_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643930/ecom_22_tee_blue_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643930/ecom_22_tee_blue_2.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 96055531,
+    "name": "★ BLACK SKULL LOGO TEE",
+    "permalink": "black-skull-tee",
+    "position": 20,
+    "price": 28,
+    "default_price": 28,
+    "tax": 0,
+    "on_sale": false,
+    "url": "/product/black-skull-tee",
+    "status": "active",
+    "created_at": "2023-01-14T00:02:18.000Z",
+    "description": "★ Otaku Is Dead Skull Logo Tee\r\n\r\n100% soft cotton\r\n195 g/m²\r\nScreen-printed\r\nMade in Spain\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 377331754,
+        "name": "XL",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331751,
+        "name": "L",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331748,
+        "name": "M",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      },
+      {
+        "id": 377331745,
+        "name": "S",
+        "price": 28,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5,
+        "amount_with_others": 6,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 15,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643954/ecom_22_tee_black_1.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643954/ecom_22_tee_black_1.jpg",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/410643951/ecom_22_tee_black_2.jpg",
+        "secure_url": "https://assets.bigcartel.com/product_images/410643951/ecom_22_tee_black_2.jpg",
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1420420575,
+        "name": "★ t-shirts",
+        "permalink": "t-shirts",
+        "url": "/category/t-shirts"
+      }
+    ],
+    "option_groups": []
+  },
+  {
+    "id": 94913962,
+    "name": "★ BLUE SKULL BELT",
+    "permalink": "blue-skull-belt",
+    "position": 23,
+    "price": 40,
+    "default_price": 40,
+    "tax": 0,
+    "on_sale": true,
+    "url": "/product/blue-skull-belt",
+    "status": "active",
+    "created_at": "2022-12-01T17:35:54.000Z",
+    "description": "★ Otaku Is Dead 22* skull belt \r\n\r\n115cm total length.\r\nVegan leather\r\nDebossed logo inside\r\n\r\nAll sales are final. No returns/refunds.",
+    "has_option_groups": false,
+    "has_password_protection": false,
+    "options": [
+      {
+        "id": 372178363,
+        "name": "Default",
+        "price": 40,
+        "sold_out": false,
+        "has_custom_price": false,
+        "option_group_values": []
+      }
+    ],
+    "shipping": [
+      {
+        "amount_alone": 5,
+        "amount_with_others": 5,
+        "country": {
+          "id": 36,
+          "name": "Spain",
+          "code": "ES"
+        }
+      },
+      {
+        "amount_alone": 10,
+        "amount_with_others": 10
+      }
+    ],
+    "images": [
+      {
+        "url": "https://assets.bigcartel.com/product_images/352916800/blue+belt.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/352916800/blue+belt.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355596259/blue+belt_estirado2.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355596259/blue+belt_estirado2.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355374025/detail.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355374025/detail.png",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "url": "https://assets.bigcartel.com/product_images/355775107/nagui_accesories.png",
+        "secure_url": "https://assets.bigcartel.com/product_images/355775107/nagui_accesories.png",
+        "width": 4000,
+        "height": 3000
+      }
+    ],
+    "artists": [],
+    "categories": [
+      {
+        "id": 1421864721,
+        "name": "★ accesories",
+        "permalink": "accesories",
+        "url": "/category/accesories"
+      }
+    ],
+    "option_groups": []
+  }
+]

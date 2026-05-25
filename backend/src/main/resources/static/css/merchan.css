@@ -1,0 +1,88 @@
+@import url("global.css");
+
+/* ─── Main: three-column card grid ──────────────────────────────── */
+main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 48px) 20px 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2.8vw, 28px);
+    align-items: stretch;
+}
+
+/* ─── Page Title ─────────────────────────────────────────────────── */
+h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: transparent;
+    background: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────── */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: clamp(16px, 2.2vw, 26px);
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+    border: 1px solid var(--line);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.container h2 {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    line-height: 1;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: transparent;
+    background: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.container img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+.container a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container button {
+    width: 100%;
+    max-width: 280px;
+}
+
+@media (max-width: 700px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}

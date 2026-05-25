@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reproductor de Spotify - Artistas</title>
+    <link rel="stylesheet" href="../css/spotify.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Artistas que te pueden molar</h1>
+
+        <div class="artist-selector">
+            <label for="artist">Selecciona un artista:</label>
+            <select id="artist">
+                <option value="6ElAgKMZexI4XMu9PfGQqr">PyroZg</option>
+                <option value="0Xh8dOolJNXHdpFbvZDp64">Dasiko</option>
+                <option value="6VxMbxMZPKYvKflzv6lKEQ">AZ27</option>
+                <option value="6Rzl1eZOmFGtsedwm1ThdT">NoRulesXNoDrama</option>
+                <option value="5RH4PmqmFgzDeLx7fnyVV2">Gsmilebeats</option>
+                <option value="1VqQ9Zo04ZQPnpY06ZSZSF">Slykid</option>
+                <option value="59sVaiyYl0SgIKoRcETSrx">Necroticgorebeast</option>
+            </select>
+        </div>
+
+        <div id="spotify-player" class="spotify-player">
+            <!-- El reproductor se cargará aquí -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const artistSelect = document.getElementById('artist');
+            const playerDiv = document.getElementById('spotify-player');
+
+            function updatePlayer(artistId) {
+                playerDiv.innerHTML = `
+      <iframe
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/artist/${artistId}?utm_source=generator&theme=0"
+        width="100%" height="380"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    `;
+            }
+
+            // Cargar el primer artista por defecto
+            updatePlayer(artistSelect.value);
+
+            // Cambiar de artista
+            artistSelect.addEventListener('change', function () {
+                updatePlayer(this.value);
+            });
+        });
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,65 @@
+@import url("global.css");
+
+/* ─── Body override (mini embedded player, no full-page layout) ── */
+body {
+    min-height: unset;
+    display: block;
+    padding: clamp(16px, 3vw, 24px);
+}
+
+/* ─── Container ──────────────────────────────────────────────────── */
+.container {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    padding: clamp(18px, 2.5vw, 28px);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+}
+
+/* ─── Heading ────────────────────────────────────────────────────── */
+h1 {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1.4rem, 3.4vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: transparent;
+    background: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* ─── Artist Selector ────────────────────────────────────────────── */
+.artist-selector {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    color: var(--text-soft);
+}
+
+select {
+    width: min(360px, 100%);
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-family: "Manrope", sans-serif;
+    border-radius: var(--radius-input);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--input-bg);
+    color: var(--text-main);
+    outline: none;
+    transition: border-color var(--ease), box-shadow var(--ease);
+}
+
+select:focus {
+    border-color: rgba(146, 196, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(118, 175, 255, 0.22);
+}
+
+/* ─── Player ─────────────────────────────────────────────────────── */
+.spotify-player {
+    margin-top: 18px;
+}

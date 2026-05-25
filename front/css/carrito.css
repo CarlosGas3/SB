@@ -1,0 +1,82 @@
+@import url("global.css");
+
+/* ─── Main ───────────────────────────────────────────────────────── */
+main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+}
+
+/* ─── Cart Items ─────────────────────────────────────────────────── */
+#cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+    border: 1px solid var(--line);
+}
+
+.cart-item img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cart-item-info h3 {
+    font-family: "Syne", sans-serif;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.cart-item-info p {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+}
+
+.cart-total {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+    border: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cart-total p {
+    font-family: "Syne", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* ─── Empty State ────────────────────────────────────────────────── */
+main:empty::before {
+    content: "Tu carrito está vacío.";
+    display: block;
+    width: min(680px, 100%);
+    margin: 40px auto;
+    padding: 32px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+    color: var(--text-soft);
+    text-align: center;
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+}
