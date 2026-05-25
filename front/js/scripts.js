@@ -52,6 +52,38 @@ async function loadProductsVinsi() {
             button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
 
             div.append(image, title, priceEl, button);
+
+            // Mostrar desplegable de tallas si el producto tiene status: active y opciones
+            if (p.status === "active" && p.options && p.options.length > 0) {
+                const validOptions = p.options.filter(opt => {
+                    const name = (opt.name || "").toLowerCase();
+                    return name !== "default" && name !== "default title";
+                });
+                
+                if (validOptions.length > 0) {
+                    const sizeSelect = document.createElement("select");
+                    sizeSelect.className = "size-select";
+                    
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Selecciona una talla";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    sizeSelect.appendChild(defaultOption);
+
+                    // Agregar cada opción (talla) al desplegable
+                    validOptions.forEach((option) => {
+                        const opt = document.createElement("option");
+                        opt.value = option.name;
+                        opt.textContent = option.name + (option.sold_out ? " (Agotado)" : "");
+                        opt.disabled = option.sold_out;
+                        sizeSelect.appendChild(opt);
+                    });
+
+                    div.insertBefore(sizeSelect, button);
+                }
+            }
+
             container.appendChild(div);
         });
     } catch (error) {
@@ -85,7 +117,7 @@ async function loadProductsBose() {
                 ? variant.price + "€"
                 : "Este producto no está disponible por ahora.";
             const btnText = variant?.price ? "Añadir al carrito" : "Ver producto";
-            const imgSrc = p.images?.[0]?.src || variant?.featured_image?.src || DEFAULT_PRODUCT_IMAGE;
+            const imgSrc = variant?.featured_image?.src || DEFAULT_PRODUCT_IMAGE;
             const productUrl = `https://bosecondieresis.net/products/${p.handle}`;
 
             const image = createImageElement(imgSrc, p.title);
@@ -98,6 +130,116 @@ async function loadProductsBose() {
             button.addEventListener("click", () => window.open(productUrl, "_blank"));
 
             div.append(image, title, priceEl, button);
+
+            // Mostrar desplegable de tallas si el producto tiene variants
+            if (p.variants && p.variants.length > 0) {
+                const validVariants = p.variants.filter(v => {
+                    const title = (v.title || "").toLowerCase();
+                    return title !== "default" && title !== "default title";
+                });
+
+                if (validVariants.length > 0) {
+                    const sizeSelect = document.createElement("select");
+                    sizeSelect.className = "size-select";
+                    
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Selecciona una talla";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    sizeSelect.appendChild(defaultOption);
+
+                    // Agregar cada variant (talla) al desplegable
+                    validVariants.forEach((v) => {
+                        const opt = document.createElement("option");
+                        opt.value = v.title;
+                        opt.textContent = v.title + (v.available ? "" : " (Agotado)");
+                        opt.disabled = !v.available;
+                        sizeSelect.appendChild(opt);
+                    });
+
+                    div.insertBefore(sizeSelect, button);
+                }
+            }
+
+            container.appendChild(div);
+        });
+    } catch (error) {
+        console.error("Error cargando productos:", error);
+        document.getElementById("products").innerText =
+            "Error cargando productos.";
+    }
+}
+
+async function loadProductsSwyry() {
+    try {
+        let data;
+        try {
+            const res = await fetch("/api/mock/products/swyry");
+            if (!res.ok) throw new Error("API no disponible");
+            data = await res.json();
+        } catch {
+            const res = await fetch("../JSON/productsSwyry.json");
+            data = await res.json();
+        }
+        const products = data.products;
+        const container = document.getElementById("products");
+        container.innerHTML = "";
+
+        products.forEach((p) => {
+            const div = document.createElement("div");
+            div.className = "product";
+
+            const variant = p.variants?.[0];
+            const price = variant?.price
+                ? variant.price + "€"
+                : "Este producto no está disponible por ahora.";
+            const btnText = variant?.price ? "Añadir al carrito" : "Ver producto";
+            const imgSrc = p.images?.[0]?.src || variant?.featured_image?.src || DEFAULT_PRODUCT_IMAGE;
+            const productUrl = `https://swyry.com/products/${p.handle}`;
+
+            const image = createImageElement(imgSrc, p.title);
+            const title = document.createElement("h3");
+            title.textContent = p.title;
+            const priceEl = document.createElement("p");
+            priceEl.textContent = price;
+            const button = document.createElement("button");
+            button.textContent = btnText;
+            button.addEventListener("click", () => window.open(productUrl, "_blank"));
+
+            div.append(image, title, priceEl, button);
+
+            // Mostrar desplegable de tallas si el producto tiene variants
+            if (p.variants && p.variants.length > 0) {
+                const validVariants = p.variants.filter(v => {
+                    const title = (v.title || "").toLowerCase();
+                    return title !== "default" && title !== "default title";
+                });
+
+                if (validVariants.length > 0) {
+                    const sizeSelect = document.createElement("select");
+                    sizeSelect.className = "size-select";
+                    
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Selecciona una talla";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    sizeSelect.appendChild(defaultOption);
+
+                    // Agregar cada variant (talla) al desplegable
+                    validVariants.forEach((v) => {
+                        const opt = document.createElement("option");
+                        opt.value = v.title;
+                        opt.textContent = v.title + (v.available ? "" : " (Agotado)");
+                        opt.disabled = !v.available;
+                        sizeSelect.appendChild(opt);
+                    });
+
+                    div.insertBefore(sizeSelect, button);
+                }
+            }
+
             container.appendChild(div);
         });
     } catch (error) {
@@ -147,17 +289,19 @@ const cambiarImagenMerchan = () => {
     ];
     let indice = 0;
     const crossfade = _setupCrossfade(img);
-    setInterval(() => {
-        indice = (indice + 1) % imagenes.length;
-        crossfade(imagenes[indice]);
-    }, 5000);
+    setTimeout(() => {
+        setInterval(() => {
+            indice = (indice + 1) % imagenes.length;
+            crossfade(imagenes[indice]);
+        }, 5000);
+    }, 2500);
 };
 
 const cambiarImagenIndie = () => {
     const img = document.getElementById("indie");
     if (!img) return;
     const imagenes = [
-        "../assets/indie/0pulenz3.jpg",
+        "../assets/indie/swyry.jpg",
         "../assets/indie/bosecondieresis.jpg",
         "../assets/indie/vinsi72.jpg"
     ];
