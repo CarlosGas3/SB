@@ -11,6 +11,7 @@ public class User {
     private String address;
     private String city;
     private String country;
+    private String tarjetaCredito;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -72,6 +73,14 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getTarjetaCredito() {
+        return tarjetaCredito;
+    }
+
+    public void setTarjetaCredito(String tarjetaCredito) {
+        this.tarjetaCredito = tarjetaCredito;
     }
 
     @JsonIgnore

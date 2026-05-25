@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.ApiResponse;
-import com.example.demo.model.Purchase;
-import com.example.demo.model.PurchaseRequest;
-import com.example.demo.service.PurchaseService;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.example.demo.model.ApiResponse;
+import com.example.demo.model.Purchase;
+import com.example.demo.model.PurchaseRequest;
+import com.example.demo.service.PurchaseService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/purchases")
 public class PurchaseController {

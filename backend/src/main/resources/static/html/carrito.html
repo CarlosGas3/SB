@@ -17,11 +17,59 @@
             <li><a href="iniciarSesion.html"><img src="../assets/usuario.png" alt="Contacto" class="icono"></a></li>
         </ul>
     </header>
-    <main></main>
+    <main>
+        <section class="cart-layout">
+            <div class="cart-header">
+                <p class="eyebrow">Checkout</p>
+                <h1>Tu carrito</h1>
+                <p class="cart-intro">Revisa los productos, selecciona la tarjeta guardada y confirma la compra para recibir la confirmación por email.</p>
+            </div>
+
+            <div id="cart-alert" class="cart-alert hidden"></div>
+            <div id="cart-items" class="cart-items"></div>
+
+            <div id="cart-footer" class="cart-footer hidden">
+                <div class="cart-summary">
+                    <p class="cart-summary-label">Total</p>
+                    <p id="cart-total" class="cart-summary-value">0,00 €</p>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form">
+                    <div class="payment-fields">
+                        <label for="paymentCard">Tarjeta guardada</label>
+                        <select id="paymentCard" name="paymentCard"></select>
+
+                        <label for="newPaymentCard">Añadir nueva tarjeta</label>
+                        <input id="newPaymentCard" name="newPaymentCard" type="text" placeholder="Ej. **** 1234" autocomplete="cc-number">
+                    </div>
+
+                    <div id="guestEmailContainer" class="guest-email-container hidden">
+                        <label for="guestEmail">Correo electrónico</label>
+                        <input id="guestEmail" name="guestEmail" type="email" placeholder="correo@dominio.com" autocomplete="email">
+                    </div>
+
+                    <p id="checkoutHint" class="checkout-hint"></p>
+                    <button type="submit">Finalizar compra</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="successModal" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card">
+            <p class="eyebrow">Compra completada</p>
+            <h2>¡Compra realizada correctamente!</h2>
+            <p id="successMessageText"></p>
+            <p>Te vamos a redirigir al inicio para seguir navegando.</p>
+            <button id="goHomeButton" type="button">Volver al inicio</button>
+        </div>
+    </div>
+
     <footer>
         <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
         <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
     </footer>
+    <script src="../js/scripts.js"></script>
 </body>
 
 </html>

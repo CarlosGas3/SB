@@ -38,17 +38,20 @@ public class PurchaseService {
             throw new IllegalArgumentException("La compra debe contener al menos un producto");
         }
 
-        String userId = request.getUserId();
-        if ((userId == null || userId.isBlank()) && request.getEmail() != null) {
-            userId = userService.findByEmail(request.getEmail()).map(User::getId).orElse(null);
+        String email = request.getEmail() != null ? request.getEmail().trim() : "";
+        if (email.isBlank()) {
+            throw new IllegalArgumentException("El correo electrónico es obligatorio para completar la compra");
         }
 
-        if (userId == null || userId.isBlank()) {
-            if (request.getEmail() != null && !request.getEmail().isBlank()) {
-                User guest = userService.createGuest(request.getEmail(), request.getShippingInfo() != null ? request.getShippingInfo().getName() : "Cliente");
-                userId = guest.getId();
-            } else {
-                throw new IllegalArgumentException("El usuario debe identificarse con userId o email");
+        String userId = request.getUserId();
+        User user = null;
+        if (userId != null && !userId.isBlank()) {
+            user = userService.getUserById(userId).orElse(null);
+        }
+        if (user == null) {
+            user = userService.findByEmail(email).orElse(null);
+            if (user != null) {
+                userId = user.getId();
             }
         }
 
@@ -62,13 +65,13 @@ public class PurchaseService {
 
         purchaseRepository.savePurchase(purchase);
 
-        User user = userService.getUserById(userId).orElseGet(() -> {
-            User fallback = new User();
-            fallback.setEmail(request.getEmail());
-            fallback.setName(request.getShippingInfo() != null ? request.getShippingInfo().getName() : "Cliente");
-            return fallback;
-        });
-        emailService.sendOrderConfirmation(user, purchase);
+        User emailUser = user;
+        if (emailUser == null) {
+            emailUser = new User();
+            emailUser.setEmail(email);
+            emailUser.setName(request.getShippingInfo() != null ? request.getShippingInfo().getName() : "Cliente");
+        }
+        emailService.sendOrderConfirmation(emailUser, purchase);
         return purchase;
     }
 
@@ -83,16 +86,25 @@ public class PurchaseService {
         }
         for (PurchaseItemRequest request : itemRequests) {
             Optional<Product> product = productService.getProductById(request.getProductId());
+            PurchaseItem item = new PurchaseItem();
+            item.setProductId(request.getProductId());
+            item.setSize(request.getSize());
+            item.setQuantity(Math.max(1, request.getQuantity()));
+
             if (product.isPresent()) {
-                PurchaseItem item = new PurchaseItem();
-                item.setProductId(product.get().getId());
                 item.setProductName(product.get().getName());
-                item.setSize(request.getSize());
-                item.setQuantity(Math.max(1, request.getQuantity()));
                 item.setUnitPrice(product.get().getPrice());
-                item.setTotalPrice(item.getUnitPrice() * item.getQuantity());
-                items.add(item);
+            } else {
+                Double unitPrice = request.getUnitPrice();
+                if (unitPrice == null) {
+                    unitPrice = 0.0;
+                }
+                item.setProductName(request.getName() != null && !request.getName().isBlank() ? request.getName() : request.getProductId());
+                item.setUnitPrice(unitPrice);
             }
+
+            item.setTotalPrice(item.getUnitPrice() * item.getQuantity());
+            items.add(item);
         }
         return items;
     }

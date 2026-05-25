@@ -21,6 +21,7 @@ public class UserRepository {
         user.setAddress(rs.getString("address"));
         user.setCity(rs.getString("city"));
         user.setCountry(rs.getString("country"));
+        user.setTarjetaCredito(rs.getString("tarjeta_credito"));
         user.setPassword(rs.getString("password"));
         return user;
     };
@@ -46,7 +47,7 @@ public class UserRepository {
         if (user.getId() == null || user.getId().isBlank()) {
             user.setId(UUID.randomUUID().toString());
         }
-        jdbcTemplate.update("INSERT INTO users (id, email, password, name, phone, address, city, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO users (id, email, password, name, phone, address, city, country, tarjeta_credito) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
@@ -54,7 +55,8 @@ public class UserRepository {
                 user.getPhone(),
                 user.getAddress(),
                 user.getCity(),
-                user.getCountry());
+                user.getCountry(),
+                user.getTarjetaCredito());
         return user;
     }
 
