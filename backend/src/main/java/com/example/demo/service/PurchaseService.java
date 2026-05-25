@@ -18,6 +18,7 @@ import com.example.demo.repository.PurchaseRepository;
 
 @Service
 public class PurchaseService {
+
     private final PurchaseRepository purchaseRepository;
     private final ProductService productService;
     private final UserService userService;
@@ -59,7 +60,19 @@ public class PurchaseService {
         purchase.setId(UUID.randomUUID().toString());
         purchase.setUserId(userId);
         purchase.setItems(items);
-        purchase.setShippingInfo(request.getShippingInfo());
+        // If shipping info not provided but we have a user, use user's saved address
+        if ((request.getShippingInfo() == null || request.getShippingInfo().getAddress() == null || request.getShippingInfo().getAddress().isBlank()) && user != null) {
+            com.example.demo.model.ShippingInfo si = new com.example.demo.model.ShippingInfo();
+            si.setName(user.getName());
+            si.setAddress(user.getAddress());
+            si.setCity(user.getCity());
+            si.setCountry(user.getCountry());
+            si.setPostalCode("");
+            si.setPhone(user.getPhone());
+            purchase.setShippingInfo(si);
+        } else {
+            purchase.setShippingInfo(request.getShippingInfo());
+        }
         purchase.setTotal(total);
         purchase.setCreatedAt(LocalDateTime.now());
 

@@ -1,70 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ShadowBan - Iniciar Sesión / Registro</title>
+        <link rel="stylesheet" href="../css/iniciarSesion.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowBan - Iniciar Sesión / Registro</title>
-    <link rel="stylesheet" href="../css/iniciarSesion.css">
-</head>
+    <body>
+        <header>
+            <a href="inicio.html"
+                ><img
+                    src="../assets/logo_large_w_transparent.png"
+                    alt="Logo de ShadowBan"
+                    id="logo"
+            /></a>
+            <ul>
+                <li>
+                    <a href="contacto.html"
+                        ><img
+                            src="../assets/info.png"
+                            alt="Contacto"
+                            class="icono"
+                    /></a>
+                </li>
+                <li>
+                    <a href="carrito.html"
+                        ><img
+                            src="../assets/carrito.png"
+                            alt="Carrito"
+                            class="icono"
+                    /></a>
+                </li>
+                <li>
+                    <a href="iniciarSesion.html"
+                        ><img
+                            src="../assets/usuario.png"
+                            alt="Contacto"
+                            class="icono"
+                    /></a>
+                </li>
+            </ul>
+        </header>
+        <main>
+            <article id="iniciarSesion">
+                <h2>Iniciar sesión</h2>
+                <form id="loginForm">
+                    <label for="loginEmail">Correo electrónico:</label>
+                    <input
+                        type="text"
+                        id="loginEmail"
+                        name="loginEmail"
+                        required
+                    />
 
-<body>
-    <header>
-        <a href="inicio.html"><img src="../assets/logo_large_w_transparent.png" alt="Logo de ShadowBan" id="logo"></a>
-        <ul>
-            <li><a href="contacto.html"><img src="../assets/info.png" alt="Contacto" class="icono"></a></li>
-            <li><a href="carrito.html"><img src="../assets/carrito.png" alt="Carrito" class="icono"></a></li>
-            <li><a href="iniciarSesion.html"><img src="../assets/usuario.png" alt="Contacto" class="icono"></a></li>
-        </ul>
-    </header>
-    <main>
-        <article id="iniciarSesion">
-            <h2>Iniciar sesión</h2>
-            <form>
-                <label for="email">Correo electrónico:</label>
-                <input type="text" id="email" name="email" required>
+                    <label for="loginPassword">Contraseña:</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="loginPassword"
+                        required
+                    />
 
-                <label for="passw">Contraseña:</label>
-                <input type="passw" id="passw" name="passw" required>
-
-                <button type="submit" id="iniciarSesion">Iniciar sesión</button>
-            </form>
-        </article>
-        <article id="registrarse">
-            <details>
-                <summary>
-                    <h2>Crear cuenta</h2>
-                </summary>
-                <form>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
-
-                    <label for="passw">Contraseña:</label>
-                    <input type="password" id="passw" name="passw" required>
-
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="telefono">Número de teléfono:</label>
-                    <input type="number" id="telefono" name="telefono" required>
-
-                    <label for="fecha">Fecha de nacimiento:</label>
-                    <input type="date" id="fecha" name="fecha" required>
-
-                    <button type="submit" id="registrarse">Crear cuenta</button>
+                    <button type="submit" id="loginButton">
+                        Iniciar sesión
+                    </button>
                 </form>
-            </details>
-        </article>
+            </article>
+            <article id="registrarse">
+                <details>
+                    <summary>
+                        <h2>Crear cuenta</h2>
+                    </summary>
+                    <form id="registerForm">
+                        <label for="regNombre">Nombre:</label>
+                        <input
+                            type="text"
+                            id="regNombre"
+                            name="regNombre"
+                            required
+                        />
 
-    </main>
-    <footer>
-        <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
-        <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
-    </footer>
-</body>
+                        <label for="regApellido">Apellido:</label>
+                        <input
+                            type="text"
+                            id="regApellido"
+                            name="regApellido"
+                            required
+                        />
 
+                        <label for="regPassword">Contraseña:</label>
+                        <input
+                            type="password"
+                            id="regPassword"
+                            name="regPassword"
+                            required
+                        />
+
+                        <label for="regEmail">Correo electrónico:</label>
+                        <input
+                            type="email"
+                            id="regEmail"
+                            name="regEmail"
+                            required
+                        />
+
+                        <label for="regTelefono">Número de teléfono:</label>
+                        <input
+                            type="number"
+                            id="regTelefono"
+                            name="regTelefono"
+                            required
+                        />
+
+                        <label for="regFecha">Fecha de nacimiento:</label>
+                        <input
+                            type="date"
+                            id="regFecha"
+                            name="regFecha"
+                            required
+                        />
+
+                        <label for="regDireccion">Dirección:</label>
+                        <input
+                            type="text"
+                            id="regDireccion"
+                            name="regDireccion"
+                        />
+
+                        <label for="regCiudad">Ciudad:</label>
+                        <input type="text" id="regCiudad" name="regCiudad" />
+
+                        <label for="regPais">País:</label>
+                        <input type="text" id="regPais" name="regPais" />
+
+                        <button type="submit" id="registerButton">
+                            Crear cuenta
+                        </button>
+                    </form>
+                </details>
+            </article>
+        </main>
+        <footer>
+            <img
+                src="../assets/logoPNGwhite.png"
+                alt="Logo de ShadowBan"
+                id="logo"
+            />
+            <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
+        </footer>
+
+        <div id="authPopup" class="popup-overlay popup-hidden">
+            <div class="popup-content">
+                <button type="button" id="popupClose" class="popup-close">
+                    ×
+                </button>
+                <h3 id="authPopupTitle">Aviso de autenticación</h3>
+                <p id="authPopupMessage">Aquí irá el mensaje.</p>
+            </div>
+        </div>
+
+        <script src="../js/scripts.js"></script>
+    </body>
 </html>
-

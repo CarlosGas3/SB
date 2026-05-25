@@ -454,6 +454,9 @@ const initAuthForms = () => {
             const email = document.getElementById("regEmail").value.trim();
             const password = document.getElementById("regPassword").value.trim();
             const telefono = document.getElementById("regTelefono").value.trim();
+            const direccion = document.getElementById("regDireccion").value.trim();
+            const ciudad = document.getElementById("regCiudad").value.trim();
+            const pais = document.getElementById("regPais").value.trim();
 
             const response = await fetch("/api/auth/register", {
                 method: "POST",
@@ -462,7 +465,10 @@ const initAuthForms = () => {
                     name: `${nombre} ${apellido}`,
                     email,
                     password,
-                    phone: telefono
+                    phone: telefono,
+                    address: direccion,
+                    city: ciudad,
+                    country: pais
                 })
             });
 

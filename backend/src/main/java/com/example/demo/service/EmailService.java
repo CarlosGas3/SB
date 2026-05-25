@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Purchase;
-import com.example.demo.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +8,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Purchase;
+import com.example.demo.model.User;
+
 @Service
 public class EmailService {
+
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     private JavaMailSender mailSender;
@@ -26,7 +28,7 @@ public class EmailService {
     }
 
     public void sendOrderConfirmation(User user, Purchase purchase) {
-        String subject = "Confirmación de compra " + purchase.getId();
+        String subject = "Confirmación de compra - ShadowBan";
         String body = buildBody(user, purchase);
 
         if (mailSender != null) {
@@ -48,23 +50,64 @@ public class EmailService {
 
     private String buildBody(User user, Purchase purchase) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Hola ").append(user.getName()).append(",\n\n");
-        builder.append("Gracias por tu compra. Aquí tienes el resumen:\n\n");
+
+        // Nombre y apellido (capitalizar primeras letras si es posible)
+        String fullName = safe(user.getName()).trim();
+        String first = "";
+        String last = "";
+        if (!fullName.isEmpty()) {
+            String[] parts = fullName.split("\\s+");
+            first = capitalize(parts[0]);
+            if (parts.length > 1) {
+                last = capitalize(parts[1]);
+            }
+        }
+
+        builder.append("Hola");
+        if (!first.isEmpty()) {
+            builder.append(" ").append(first);
+        }
+        if (!last.isEmpty()) {
+            builder.append(" ").append(last);
+        }
+        builder.append(",\n\n");
+
+        builder.append("Gracias por tu compra, aquí tienes el resumen:\n\n");
+
         purchase.getItems().forEach(item -> builder.append("- ")
                 .append(item.getProductName())
                 .append(" x")
                 .append(item.getQuantity())
-                .append(" — €")
-                .append(item.getUnitPrice())
-                .append("\n"));
-        builder.append("\nTotal: €").append(purchase.getTotal()).append("\n\n");
-        builder.append("Enviado a:\n")
-                .append(purchase.getShippingInfo().getName()).append("\n")
-                .append(purchase.getShippingInfo().getAddress()).append("\n")
-                .append(purchase.getShippingInfo().getCity()).append(", ")
-                .append(purchase.getShippingInfo().getPostalCode()).append("\n")
-                .append(purchase.getShippingInfo().getCountry()).append("\n\n");
-        builder.append("Gracias por comprar con nosotros.\n");
+                .append(" - ")
+                .append(String.format("%.2f", item.getUnitPrice()))
+                .append("€\n"));
+
+        builder.append("\nTotal: ").append(String.format("%.2f", purchase.getTotal())).append("€\n\n");
+
+        if (purchase.getShippingInfo() != null) {
+            builder.append("Enviado a:\n")
+                    .append(safe(purchase.getShippingInfo().getCity())).append(",\n")
+                    .append(safe(purchase.getShippingInfo().getAddress())).append("\n\n");
+        } else {
+            builder.append("Enviado a:\n(sin información de envío)\n\n");
+        }
+
+        builder.append("Gracias por comprar con ShadowBan.");
         return builder.toString();
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.isBlank()) {
+            return "";
+        }
+        s = s.trim();
+        if (s.length() == 1) {
+            return s.toUpperCase();
+        }
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
+
+    private String safe(String s) {
+        return s == null ? "" : s;
     }
 }
