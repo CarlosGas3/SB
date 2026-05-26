@@ -64,10 +64,10 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
+                            <outputDirectory>${project.basedir}/src/main/resources/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../front</directory>
+                                    <directory>${project.basedir}/../front</directory>
                                     <includes>
                                         <include>**/*</include>
                                     </includes>
