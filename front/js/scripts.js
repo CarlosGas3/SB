@@ -415,6 +415,24 @@ function removeCartItem(index) {
     renderCartPage();
 }
 
+function animateRemoveCartItem(index, itemElement) {
+    if (!itemElement) {
+        removeCartItem(index);
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        removeCartItem(index);
+        return;
+    }
+
+    itemElement.classList.add('is-removing');
+    setTimeout(() => {
+        removeCartItem(index);
+    }, 220);
+}
+
 function changeQuantity(index, delta) {
     const cart = getCart();
     const item = cart[index];
@@ -513,7 +531,9 @@ function renderCartPage() {
         container.querySelectorAll('.remove-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const idx = Number(e.target.dataset.idx);
-                removeCartItem(idx);
+                const itemEl = e.target.closest('.cart-item');
+                e.target.disabled = true;
+                animateRemoveCartItem(idx, itemEl);
             });
         });
 
@@ -884,6 +904,8 @@ const initAuthForms = () => {
 
 // Inicializar el formulario cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
+    initPageElementFade();
+
     if (document.getElementById("contactForm")) {
         initContactForm();
     }
@@ -941,4 +963,21 @@ const closePopup = () => {
         window.location.href = "../html/inicio.html";
     }
 };
+
+function initPageElementFade() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const candidates = Array.from(document.querySelectorAll('header, main > *, footer, #back, #spotify'));
+    const elements = Array.from(new Set(candidates)).filter(Boolean);
+
+    elements.forEach((el, idx) => {
+        el.classList.add('page-fade-item');
+        el.style.setProperty('--page-fade-delay', `${Math.min(idx * 35, 210)}ms`);
+    });
+
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-fade-entered');
+    });
+}
 

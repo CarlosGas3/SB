@@ -16,6 +16,7 @@
     --radius-input: 12px;
     --radius-btn:   999px;
     --ease:         0.22s ease;
+    --title-gradient: linear-gradient(90deg, #ffffff 8%, #c4b5fd 45%, #7c3aed 85%);
 }
 
 /* ─── Reset ──────────────────────────────────────────────────────── */
@@ -38,6 +39,19 @@ body {
     overflow-x: hidden;
 }
 
+.page-fade-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    transition-delay: var(--page-fade-delay, 0ms);
+    will-change: opacity, transform;
+}
+
+body.page-fade-entered .page-fade-item {
+    opacity: 1;
+    transform: none;
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -50,6 +64,19 @@ body::before {
     box-shadow: 0 0 28px rgba(190, 217, 255, 0.35);
     z-index: 0;
     pointer-events: none;
+}
+
+/* ─── Shared Title Style ────────────────────────────────────────── */
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+    color: transparent;
+    background: var(--title-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* ─── Header ─────────────────────────────────────────────────────── */
@@ -269,3 +296,12 @@ footer p {
         text-align: left;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .page-fade-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+

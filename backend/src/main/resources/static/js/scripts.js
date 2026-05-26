@@ -87,6 +87,30 @@ function removeCartItem(productId, size) {
     saveCart(cart);
 }
 
+function animateRemoveCartItem(button) {
+    if (!button) return;
+    const wrapper = button.closest('.cart-item');
+    if (!wrapper) {
+        removeCartItem(button.dataset.removeProductId, button.dataset.removeSize);
+        renderCartPage();
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        removeCartItem(button.dataset.removeProductId, button.dataset.removeSize);
+        renderCartPage();
+        return;
+    }
+
+    button.disabled = true;
+    wrapper.classList.add('is-removing');
+    setTimeout(() => {
+        removeCartItem(button.dataset.removeProductId, button.dataset.removeSize);
+        renderCartPage();
+    }, 220);
+}
+
 function clearCart() {
     localStorage.removeItem(CART_STORAGE_KEY);
     updateCartCount();
@@ -556,8 +580,7 @@ function renderCartPage() {
 
     cartItemsContainer.querySelectorAll('[data-remove-product-id]').forEach(button => {
         button.addEventListener('click', () => {
-            removeCartItem(button.dataset.removeProductId, button.dataset.removeSize);
-            renderCartPage();
+            animateRemoveCartItem(button);
         });
     });
 
@@ -702,8 +725,27 @@ function initCartPage() {
     }
 }
 
+function initPageElementFade() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const candidates = Array.from(document.querySelectorAll('header, main > *, footer, #back, #spotify'));
+    const elements = Array.from(new Set(candidates)).filter(Boolean);
+
+    elements.forEach((el, idx) => {
+        el.classList.add('page-fade-item');
+        el.style.setProperty('--page-fade-delay', `${Math.min(idx * 35, 210)}ms`);
+    });
+
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-fade-entered');
+    });
+}
+
 // Inicializar el formulario cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
+    initPageElementFade();
+
     if (document.getElementById("contactForm")) {
         initContactForm();
     }
