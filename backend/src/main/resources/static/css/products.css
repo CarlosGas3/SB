@@ -26,10 +26,16 @@ main {
     gap: 10px;
     border-radius: var(--radius-card);
     border: 1px solid var(--line);
-    background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), var(--bg-card));
+    background: linear-gradient(
+        170deg,
+        rgba(255, 255, 255, 0.08),
+        var(--bg-card)
+    );
     min-height: 340px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .product:hover {
@@ -64,6 +70,39 @@ main {
     width: 100%;
     min-height: 46px;
     font-size: 0.95rem;
+}
+
+/* ─── Size Select Dropdown ───────────────────────────────────────── */
+.size-select {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-family: Arial, sans-serif;
+    color: var(--text-main);
+    background: var(--input-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-input);
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.size-select:hover {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.size-select:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(139, 201, 255, 0.5);
+    box-shadow: 0 0 12px rgba(139, 201, 255, 0.2);
+}
+
+.size-select option {
+    background: #060708;
+    color: var(--text-main);
+    padding: 8px 12px;
 }
 
 @media (max-width: 480px) {

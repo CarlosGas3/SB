@@ -11,7 +11,7 @@
         <header>
             <a href="inicio.html"
                 ><img
-                    src="../assets/logoPNGpurple.png"
+                    src="../assets/logo_large_w_transparent.png"
                     alt="Logo de ShadowBan"
                     id="logo"
             /></a>
@@ -48,7 +48,7 @@
                 <form id="loginForm">
                     <label for="loginEmail">Correo electrónico:</label>
                     <input
-                        type="email"
+                        type="text"
                         id="loginEmail"
                         name="loginEmail"
                         required
@@ -107,7 +107,7 @@
 
                         <label for="regTelefono">Número de teléfono:</label>
                         <input
-                            type="tel"
+                            type="number"
                             id="regTelefono"
                             name="regTelefono"
                             required
@@ -133,11 +133,11 @@
 
                         <label for="regPais">País:</label>
                         <input type="text" id="regPais" name="regPais" />
+
                         <button type="submit" id="registerButton">
                             Crear cuenta
                         </button>
                     </form>
-                    <div id="authMessage" class="auth-message"></div>
                 </details>
             </article>
         </main>
@@ -149,6 +149,17 @@
             />
             <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
         </footer>
+
+        <div id="authPopup" class="popup-overlay popup-hidden">
+            <div class="popup-content">
+                <button type="button" id="popupClose" class="popup-close">
+                    ×
+                </button>
+                <h3 id="authPopupTitle">Aviso de autenticación</h3>
+                <p id="authPopupMessage">Aquí irá el mensaje.</p>
+            </div>
+        </div>
+
         <script src="../js/scripts.js"></script>
     </body>
 </html>
