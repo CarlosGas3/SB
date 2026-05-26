@@ -5,10 +5,10 @@ app:
     data-dir: data
 
 spring:
-    datasource:
-        url: ${MYSQL_URL}
-        username: ${MYSQLUSER}
-        password: ${MYSQLPASSWORD}
+  datasource:
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
 
     jackson:
         serialization:
