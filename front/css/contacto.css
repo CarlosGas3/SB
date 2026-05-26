@@ -102,7 +102,7 @@ select {
     border-radius: var(--radius-input);
     background: var(--input-bg);
     color: var(--text-main);
-    font-family: "Manrope", sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 0.95rem;
     outline: none;
     transition: border-color var(--ease), box-shadow var(--ease);
