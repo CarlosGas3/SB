@@ -18,6 +18,21 @@
         </ul>
     </header>
     <main>
+        <section class="about-shadowban" aria-label="Sobre ShadowBan">
+            <p>
+                ShadowBan es una plataforma web dedicada a la difusión y venta de productos independientes relacionados con la moda y la música, ofreciendo un espacio donde artistas, productores y pequeñas marcas pueden dar a conocer su trabajo de forma más accesible para el público.
+            </p>
+            <p>
+                La página reúne diferentes propuestas creativas, desde prendas de ropa con diseños originales hasta proyectos musicales de artistas emergentes, apostando por un modelo que favorece la visibilidad de creadores independientes frente a los canales comerciales tradicionales. Gracias a ello, ShadowBan actúa como un punto de encuentro entre consumidores interesados en productos únicos y creadores que buscan ampliar su alcance y conectar con nuevas audiencias.
+            </p>
+            <p>
+                Además de funcionar como tienda online, la plataforma tiene como objetivo impulsar el crecimiento de marcas y artistas poco conocidos, facilitando que sus productos lleguen a personas que valoran la originalidad, la creatividad y el trabajo independiente. De esta manera, ShadowBan contribuye a crear una comunidad centrada en la cultura alternativa, el apoyo al talento emergente y la promoción de proyectos creativos con identidad propia.
+            </p>
+            <p>
+                La filosofía de ShadowBan se basa en hacer que la moda independiente y la música underground sean más visibles, cercanas y accesibles para cualquier persona interesada en descubrir nuevas propuestas fuera de lo convencional.
+            </p>
+        </section>
+
         <section class="contact-container">
             <div class="contact-header">
                 <h1>Anuncia en ShadowBan</h1>
@@ -208,13 +223,17 @@
                 <p class="form-note">Los campos marcados con * son obligatorios</p>
             </form>
 
-            <!-- Mensaje de Confirmación -->
-            <div id="successMessage" class="success-message" style="display: none;">
-                <h2>¡Gracias por tu propuesta!</h2>
-                <p>Hemos recibido tu solicitud. Nos pondremos en contacto contigo en los próximos días.</p>
-            </div>
         </section>
     </main>
+    <div id="authPopup" class="popup-overlay popup-hidden">
+        <div class="popup-content">
+            <button type="button" id="popupClose" class="popup-close">
+                ×
+            </button>
+            <h3 id="authPopupTitle">Aviso</h3>
+            <div id="authPopupMessage">Aquí irá el contenido.</div>
+        </div>
+    </div>
     <footer>
         <img src="../assets/logoPNGwhite.png" alt="Logo de ShadowBan" id="logo">
         <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>

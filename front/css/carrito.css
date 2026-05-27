@@ -92,6 +92,15 @@ main {
     transition: border-color var(--ease), box-shadow var(--ease);
 }
 
+.cart-size-select option {
+    background: #121417;
+    color: var(--text-main);
+}
+
+.cart-size-select option:disabled {
+    color: #8a8a8a;
+}
+
 .cart-size-select:focus {
     outline: none;
     border-color: rgba(174, 144, 255, 0.7);
