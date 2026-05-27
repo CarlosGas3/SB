@@ -730,7 +730,13 @@ const initContactForm = () => {
     const artistInfoFieldset = document.getElementById("artistInfo");
     const brandInfoFieldset = document.getElementById("brandInfo");
     const userTypeRadios = document.querySelectorAll('input[name="userType"]');
-    const successMessage = document.getElementById("successMessage");
+
+    const setFieldsetState = (fieldset, enabled) => {
+        const controls = fieldset.querySelectorAll("input, select, textarea");
+        controls.forEach((control) => {
+            control.disabled = !enabled;
+        });
+    };
 
     // Mostrar/ocultar campos según el tipo de usuario
     const updateFormFieldsVisibility = () => {
@@ -739,20 +745,43 @@ const initContactForm = () => {
         if (selectedType === "artist") {
             artistInfoFieldset.style.display = "block";
             brandInfoFieldset.style.display = "none";
+            setFieldsetState(artistInfoFieldset, true);
+            setFieldsetState(brandInfoFieldset, false);
             // Marcar campos de artista como requeridos
             document.getElementById("artistName").required = true;
             document.getElementById("genre").required = true;
             document.getElementById("bio").required = true;
+            document.getElementById("companyName").required = false;
+            document.getElementById("industry").required = false;
+            document.getElementById("brandBio").required = false;
+            document.getElementById("budget").required = false;
         } else if (selectedType === "brand") {
             artistInfoFieldset.style.display = "none";
             brandInfoFieldset.style.display = "block";
+            setFieldsetState(artistInfoFieldset, false);
+            setFieldsetState(brandInfoFieldset, true);
             // Marcar campos de marca como requeridos
             document.getElementById("companyName").required = true;
             document.getElementById("industry").required = true;
             document.getElementById("brandBio").required = true;
+            document.getElementById("budget").required = true;
+            document.getElementById("artistName").required = false;
+            document.getElementById("genre").required = false;
+            document.getElementById("bio").required = false;
+            document.getElementById("experience").required = false;
         } else {
             artistInfoFieldset.style.display = "none";
             brandInfoFieldset.style.display = "none";
+            setFieldsetState(artistInfoFieldset, false);
+            setFieldsetState(brandInfoFieldset, false);
+            document.getElementById("artistName").required = false;
+            document.getElementById("genre").required = false;
+            document.getElementById("bio").required = false;
+            document.getElementById("experience").required = false;
+            document.getElementById("companyName").required = false;
+            document.getElementById("industry").required = false;
+            document.getElementById("brandBio").required = false;
+            document.getElementById("budget").required = false;
         }
     };
 
@@ -761,6 +790,8 @@ const initContactForm = () => {
         radio.addEventListener("change", updateFormFieldsVisibility);
     });
 
+    updateFormFieldsVisibility();
+
     // Validación y envío del formulario
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -768,7 +799,7 @@ const initContactForm = () => {
         // Validar que se seleccionar tipo de usuario
         const selectedType = document.querySelector('input[name="userType"]:checked');
         if (!selectedType) {
-            alert("Por favor, selecciona el tipo de usuario.");
+            showPopup("Por favor, selecciona el tipo de usuario.", false, false);
             return;
         }
 
@@ -776,7 +807,7 @@ const initContactForm = () => {
         const collaborationCheckboxes = document.querySelectorAll('input[name="collaborationType"]');
         const anyCollaborationSelected = Array.from(collaborationCheckboxes).some(cb => cb.checked);
         if (!anyCollaborationSelected) {
-            alert("Por favor, selecciona al menos un tipo de colaboración.");
+            showPopup("Por favor, selecciona al menos un tipo de colaboración.", false, false);
             return;
         }
 
@@ -785,12 +816,12 @@ const initContactForm = () => {
         if (fileInput.files.length > 0) {
             for (let file of fileInput.files) {
                 if (file.size > 10 * 1024 * 1024) { // 10MB
-                    alert(`El archivo "${file.name}" supera el tamaño máximo de 10MB.`);
+                    showPopup(`El archivo "${file.name}" supera el tamaño máximo de 10MB.`, false, false);
                     return;
                 }
             }
             if (fileInput.files.length > 5) {
-                alert("No puedes adjuntar más de 5 archivos.");
+                showPopup("No puedes adjuntar más de 5 archivos.", false, false);
                 return;
             }
         }
@@ -830,22 +861,15 @@ const initContactForm = () => {
             const result = await response.json();
 
             if (response.ok && result.success) {
-                // Mostrar mensaje de éxito
-                form.style.display = "none";
-                successMessage.style.display = "block";
-
-                // Recargar después de 5 segundos
-                setTimeout(() => {
-                    form.reset();
-                    form.style.display = "block";
-                    successMessage.style.display = "none";
-                }, 5000);
+                form.reset();
+                updateFormFieldsVisibility();
+                showPopup("¡Gracias por tu propuesta! Hemos recibido tu solicitud y te contactaremos pronto.", true, false);
             } else {
-                alert(result.message || "Error al enviar el formulario. Intenta de nuevo.");
+                showPopup(result.message || "Error al enviar el formulario. Intenta de nuevo.", false, false);
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Error al enviar el formulario. Verifica tu conexión.");
+            showPopup("Error al enviar el formulario. Verifica tu conexión.", false, false);
         }
     });
 

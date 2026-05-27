@@ -22,7 +22,11 @@ public class EmailService {
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private final String apiKey = System.getenv("RESEND_API_KEY");
+
+    private final String apiKey = System.getenv("BREVO_API_KEY");
+
+    private final String senderEmail = "noreply@shadowban.com";
+    private final String senderName = "ShadowBan";
 
     @Async
     public void sendOrderConfirmation(User user, Purchase purchase) {
@@ -33,9 +37,9 @@ public class EmailService {
         boolean sent = sendEmail(user.getEmail(), subject, body);
 
         if (sent) {
-            logger.info("Email enviado vía Resend a {}", user.getEmail());
+            logger.info("Email enviado a {}", user.getEmail());
         } else {
-            logger.info("[EMAIL MOCK] To: {}\nSubject: {}\n{}", user.getEmail(), subject, body);
+            logger.warn("[EMAIL MOCK] To: {}\nSubject: {}\n{}", user.getEmail(), subject, body);
         }
     }
 
@@ -51,25 +55,33 @@ public class EmailService {
         sendEmail(admin1, subject, body);
         sendEmail(admin2, subject, body);
 
-        logger.info("Email contacto procesado vía Resend");
+        logger.info("Email contacto enviado");
     }
 
     private boolean sendEmail(String to, String subject, String text) {
 
         if (apiKey == null || apiKey.isBlank()) {
+            logger.warn("BREVO_API_KEY no configurada");
             return false;
         }
 
         try {
             JSONObject json = new JSONObject();
-            json.put("from", "ShadowBan <onboarding@resend.dev>");
-            json.put("to", new JSONArray().put(to));
+
+            JSONObject sender = new JSONObject();
+            sender.put("name", senderName);
+            sender.put("email", senderEmail);
+
+            json.put("sender", sender);
+            json.put("to", new JSONArray().put(new JSONObject()
+                    .put("email", to)));
+
             json.put("subject", subject);
-            json.put("text", text);
+            json.put("textContent", text);
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.resend.com/emails"))
-                    .header("Authorization", "Bearer " + apiKey)
+                    .uri(URI.create("https://api.brevo.com/v3/smtp/email"))
+                    .header("api-key", apiKey)
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
                     .build();
@@ -81,17 +93,17 @@ public class EmailService {
                 return true;
             }
 
-            logger.warn("Resend error: {}", response.body());
+            logger.warn("Brevo error: {}", response.body());
             return false;
 
         } catch (Exception e) {
-            logger.warn("Error enviando email: {}", e.getMessage());
+            logger.warn("Error enviando email con Brevo: {}", e.getMessage());
             return false;
         }
     }
 
-    // ---- TU LÓGICA ORIGINAL INTACTA ----
     private String buildBody(User user, Purchase purchase) {
+
         StringBuilder builder = new StringBuilder();
 
         String fullName = safe(user.getName()).trim();

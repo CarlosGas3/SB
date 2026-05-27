@@ -15,10 +15,28 @@ main {
     align-items: start;
 }
 
-/* CTA card always spans full width below the product cards */
-main > .container:nth-child(3) {
+/* Brand cards grid */
+.products-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.products-main .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 2.8vw, 28px);
+}
+
+/* If brand count is odd, center the last one (also works for one single brand) */
+.products-main .brands-grid > .brand-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     justify-self: center;
+    width: min(520px, 100%);
+}
+
+/* CTA card always centered below the brand cards */
+.products-main > .cta-container {
+    align-self: center;
     width: min(520px, 100%);
 }
 
@@ -102,9 +120,19 @@ main > .container:nth-child(3) {
         grid-template-columns: 1fr;
     }
 
-    main > .container:nth-child(3) {
+    .products-main .brands-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .products-main .brands-grid > .brand-card:last-child:nth-child(odd) {
         grid-column: unset;
         justify-self: unset;
+        width: 100%;
+    }
+
+    .products-main > .cta-container {
+        grid-column: unset;
+        align-self: stretch;
         width: 100%;
     }
 }
