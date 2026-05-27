@@ -150,7 +150,7 @@ async function loadProductsBose() {
                 ? variant.price + "€"
                 : "Este producto no está disponible por ahora.";
             const btnText = variant?.price ? "Añadir al carrito" : "Ver producto";
-            const imgSrc = variant?.featured_image?.src || DEFAULT_PRODUCT_IMAGE;
+            const imgSrc = p.src || DEFAULT_PRODUCT_IMAGE;
             const productUrl = `https://bosecondieresis.net/products/${p.handle}`;
 
             const image = createImageElement(imgSrc, p.title);

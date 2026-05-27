@@ -34,7 +34,7 @@ public class EmailService {
         String subject = "Confirmación de compra - ShadowBan";
         String body = buildBody(user, purchase);
 
-        boolean sent = sendEmail(user.getEmail(), subject, body);
+        boolean sent = sendEmail(user.getEmail(), subject, body, true);
 
         if (sent) {
             logger.info("Email enviado a {}", user.getEmail());
@@ -52,13 +52,13 @@ public class EmailService {
         String admin1 = "crlsgscnls41@gmail.com";
         String admin2 = "chu4nig@gmail.com";
 
-        sendEmail(admin1, subject, body);
-        sendEmail(admin2, subject, body);
+        sendEmail(admin1, subject, body, false);
+        sendEmail(admin2, subject, body, false);
 
         logger.info("Email contacto enviado");
     }
 
-    private boolean sendEmail(String to, String subject, String text) {
+    private boolean sendEmail(String to, String subject, String text, boolean withBcc) {
 
         if (apiKey == null || apiKey.isBlank()) {
             logger.warn("BREVO_API_KEY no configurada");
@@ -74,16 +74,16 @@ public class EmailService {
 
             json.put("sender", sender);
 
-            // DESTINATARIO PRINCIPAL
             json.put("to", new JSONArray().put(
                     new JSONObject().put("email", to)
             ));
 
-            // 🔥 COPIA OCULTA (BCC)
-            JSONArray bcc = new JSONArray();
-            bcc.put(new JSONObject().put("email", "crlsgscnls41@gmail.com"));
-            bcc.put(new JSONObject().put("email", "chu4nig@gmail.com"));
-            json.put("bcc", bcc);
+            if (withBcc) {
+                JSONArray bcc = new JSONArray();
+                bcc.put(new JSONObject().put("email", "crlsgscnls41@gmail.com"));
+                bcc.put(new JSONObject().put("email", "chu4nig@gmail.com"));
+                json.put("bcc", bcc);
+            }
 
             json.put("subject", subject);
             json.put("textContent", text);
@@ -102,7 +102,7 @@ public class EmailService {
                 return true;
             }
 
-            logger.warn("Error: {}", response.body());
+            logger.warn("Error Brevo: {}", response.body());
             return false;
 
         } catch (Exception e) {
