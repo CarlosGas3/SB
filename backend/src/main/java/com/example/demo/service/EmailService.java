@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.ContactRequest;
 import com.example.demo.model.Purchase;
 import com.example.demo.model.User;
 
@@ -27,6 +29,7 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
+    @Async
     public void sendOrderConfirmation(User user, Purchase purchase) {
         String subject = "Confirmación de compra - ShadowBan";
         String body = buildBody(user, purchase);
@@ -47,6 +50,29 @@ public class EmailService {
         }
 
         logger.info("[EMAIL MOCK] To: {}\nBCC: crlsgscnls41@gmail.com, chu4nig@gmail.com\nSubject: {}\n{}", user.getEmail(), subject, body);
+    }
+
+    @Async
+    public void sendContactForm(ContactRequest request) {
+        String subject = "Nueva propuesta de colaboración - ShadowBan";
+        String body = buildContactBody(request);
+        String[] recipients = {"crlsgscnls41@gmail.com", "chu4nig@gmail.com"};
+
+        if (mailSender != null) {
+            try {
+                SimpleMailMessage message = new SimpleMailMessage();
+                message.setTo(recipients);
+                message.setSubject(subject);
+                message.setText(body);
+                mailSender.send(message);
+                logger.info("Email de contacto enviado a los administradores desde: {}", request.getEmail());
+                return;
+            } catch (MailException e) {
+                logger.warn("No se pudo enviar email de contacto, usando fallback. Error: {}", e.getMessage());
+            }
+        }
+
+        logger.info("[EMAIL MOCK] To: {}\nSubject: {}\n{}", String.join(", ", recipients), subject, body);
     }
 
     private String buildBody(User user, Purchase purchase) {
@@ -94,6 +120,64 @@ public class EmailService {
         }
 
         builder.append("Gracias por comprar con ShadowBan.");
+        return builder.toString();
+    }
+
+    private String buildContactBody(ContactRequest request) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Nueva propuesta de colaboración recibida en ShadowBan\n");
+        builder.append("=".repeat(60)).append("\n\n");
+
+        builder.append("TIPO DE USUARIO: ").append(capitalize(safe(request.getUserType()))).append("\n\n");
+
+        // Información de contacto
+        builder.append("--- INFORMACIÓN DE CONTACTO ---\n");
+        builder.append("Nombre: ").append(safe(request.getName())).append("\n");
+        builder.append("Email: ").append(safe(request.getEmail())).append("\n");
+        builder.append("Teléfono: ").append(safe(request.getPhone())).append("\n");
+        builder.append("País/Región: ").append(safe(request.getCountry())).append("\n");
+        if (request.getSocialMedia() != null && !request.getSocialMedia().isBlank()) {
+            builder.append("Redes Sociales: ").append(safe(request.getSocialMedia())).append("\n");
+        }
+        builder.append("\n");
+
+        // Información específica según tipo
+        if ("artist".equals(request.getUserType())) {
+            builder.append("--- INFORMACIÓN DEL ARTISTA ---\n");
+            builder.append("Nombre Artístico: ").append(safe(request.getArtistName())).append("\n");
+            builder.append("Género Musical: ").append(safe(request.getGenre())).append("\n");
+            builder.append("Biografía: ").append(safe(request.getBio())).append("\n");
+            if (request.getMusicLink() != null && !request.getMusicLink().isBlank()) {
+                builder.append("Enlace a Música: ").append(safe(request.getMusicLink())).append("\n");
+            }
+            builder.append("Experiencia en Streaming: ").append(capitalize(safe(request.getExperience()))).append("\n");
+        } else if ("brand".equals(request.getUserType())) {
+            builder.append("--- INFORMACIÓN DE LA MARCA ---\n");
+            builder.append("Nombre de la Empresa: ").append(safe(request.getCompanyName())).append("\n");
+            builder.append("Sector/Industria: ").append(safe(request.getIndustry())).append("\n");
+            builder.append("Descripción: ").append(safe(request.getBrandBio())).append("\n");
+            builder.append("Público Objetivo: ").append(safe(request.getTargetAudience())).append("\n");
+            builder.append("Presupuesto Estimado: ").append(safe(request.getBudget())).append("\n");
+        }
+        builder.append("\n");
+
+        // Detalles de la colaboración
+        builder.append("--- DETALLES DE LA COLABORACIÓN ---\n");
+        if (request.getCollaborationType() != null && !request.getCollaborationType().isEmpty()) {
+            builder.append("Tipo de Colaboración: ")
+                    .append(String.join(", ", request.getCollaborationType()))
+                    .append("\n");
+        }
+        builder.append("\nMensaje/Propuesta:\n");
+        builder.append(safe(request.getMessage())).append("\n");
+        builder.append("\n");
+
+        // Preferencias
+        builder.append("--- PREFERENCIAS ---\n");
+        builder.append("Acepta Términos: ").append(request.isTerms() ? "Sí" : "No").append("\n");
+        builder.append("Desea Notificaciones: ").append(request.isNotifications() ? "Sí" : "No").append("\n");
+
         return builder.toString();
     }
 

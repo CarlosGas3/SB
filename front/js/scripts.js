@@ -762,7 +762,7 @@ const initContactForm = () => {
     });
 
     // Validación y envío del formulario
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         // Validar que se seleccionar tipo de usuario
@@ -795,22 +795,58 @@ const initContactForm = () => {
             }
         }
 
-        // Si todas las validaciones pasan, mostrar mensaje de éxito
-        // En un caso real, aquí enviarías los datos al servidor
-        console.log("Formulario válido. Datos listos para enviar:");
+        // Recopilar datos del formulario
         const formData = new FormData(form);
-        console.log(Object.fromEntries(formData));
+        const contactRequest = {
+            userType: formData.get("userType"),
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            country: formData.get("country"),
+            socialMedia: formData.get("socialMedia"),
+            artistName: formData.get("artistName"),
+            genre: formData.get("genre"),
+            bio: formData.get("bio"),
+            musicLink: formData.get("musicLink"),
+            experience: formData.get("experience"),
+            companyName: formData.get("companyName"),
+            industry: formData.get("industry"),
+            brandBio: formData.get("brandBio"),
+            targetAudience: formData.get("targetAudience"),
+            budget: formData.get("budget"),
+            collaborationType: formData.getAll("collaborationType"),
+            message: formData.get("message"),
+            terms: formData.get("terms") === "on",
+            notifications: formData.get("notifications") === "on"
+        };
 
-        // Ocultar formulario y mostrar mensaje de éxito
-        form.style.display = "none";
-        successMessage.style.display = "block";
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/contact`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(contactRequest)
+            });
 
-        // Opcional: Recargar después de 5 segundos
-        setTimeout(() => {
-            form.reset();
-            form.style.display = "block";
-            successMessage.style.display = "none";
-        }, 5000);
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Mostrar mensaje de éxito
+                form.style.display = "none";
+                successMessage.style.display = "block";
+
+                // Recargar después de 5 segundos
+                setTimeout(() => {
+                    form.reset();
+                    form.style.display = "block";
+                    successMessage.style.display = "none";
+                }, 5000);
+            } else {
+                alert(result.message || "Error al enviar el formulario. Intenta de nuevo.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al enviar el formulario. Verifica tu conexión.");
+        }
     });
 
     // Mostrar contador de caracteres en los textareas
