@@ -25,7 +25,7 @@ public class EmailService {
 
     private final String apiKey = System.getenv("BREVO_API_KEY");
 
-    private final String senderEmail = "noreply@shadowban.com";
+    private final String senderEmail = "shadowbanoficialsite@gmail.com";
     private final String senderName = "ShadowBan";
 
     @Async
