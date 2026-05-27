@@ -49,7 +49,7 @@ async function loadProductsVinsi() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            // default behavior: open external product page
+
             button.addEventListener("click", (e) => {
                 const sizeSelect = div.querySelector('.size-select');
                 if (btnText === 'Añadir al carrito') {
@@ -99,7 +99,7 @@ async function loadProductsVinsi() {
                     defaultOption.selected = true;
                     sizeSelect.appendChild(defaultOption);
 
-                    // Agregar cada opción (talla) al desplegable
+                    // Agregar cada talla al desplegable
                     validOptions.forEach((option) => {
                         const opt = document.createElement("option");
                         opt.value = option.name;
@@ -108,7 +108,7 @@ async function loadProductsVinsi() {
                         sizeSelect.appendChild(opt);
                     });
 
-                    // disable button until a size is selected
+                    // Sin talla botón deshabilitado
                     button.disabled = true;
                     sizeSelect.addEventListener('change', () => {
                         button.disabled = !sizeSelect.value;
@@ -208,7 +208,7 @@ async function loadProductsBose() {
                     defaultOption.selected = true;
                     sizeSelect.appendChild(defaultOption);
 
-                    // Agregar cada variant (talla) al desplegable
+                    // Agregar cada talla al desplegable
                     validVariants.forEach((v) => {
                         const opt = document.createElement("option");
                         opt.value = v.title;
@@ -217,7 +217,7 @@ async function loadProductsBose() {
                         sizeSelect.appendChild(opt);
                     });
 
-                    // disable button until a size is selected
+                    // Sin talla botón deshabilitado
                     button.disabled = true;
                     sizeSelect.addEventListener('change', () => {
                         button.disabled = !sizeSelect.value;
@@ -317,7 +317,7 @@ async function loadProductsSwyry() {
                     defaultOption.selected = true;
                     sizeSelect.appendChild(defaultOption);
 
-                    // Agregar cada variant (talla) al desplegable
+                    // Agregar cada talla al desplegable
                     validVariants.forEach((v) => {
                         const opt = document.createElement("option");
                         opt.value = v.title;
@@ -326,7 +326,7 @@ async function loadProductsSwyry() {
                         sizeSelect.appendChild(opt);
                     });
 
-                    // disable button until a size is selected
+                    // Sin talla botón deshabilitado
                     button.disabled = true;
                     sizeSelect.addEventListener('change', () => {
                         button.disabled = !sizeSelect.value;
@@ -349,9 +349,6 @@ const _setupCrossfade = (img) => {
     wrap.className = "img-crossfade-wrap";
     img.parentNode.insertBefore(wrap, img);
     wrap.appendChild(img);
-
-    // overlay = capa superior (frente); img = capa inferior (fondo, siempre opacity:1)
-    // Solo se anima la capa superior 1→0, evitando el oscurecimiento por compositing
     const overlay = document.createElement("img");
     overlay.alt = img.alt;
     overlay.src = img.src;
@@ -374,7 +371,6 @@ const _setupCrossfade = (img) => {
     };
 };
 
-// ---------- Cart helpers ----------
 const CART_KEY = "sb_cart_v1";
 
 function getCart() {
@@ -396,7 +392,6 @@ function formatCurrency(n) {
 
 function addToCart(item) {
     const cart = getCart();
-    // find existing by product id + size
     const existing = cart.find(ci => ci.id === item.id && ci.size === item.size);
     if (existing) {
         existing.quantity = (existing.quantity || 1) + (item.quantity || 1);
@@ -404,7 +399,6 @@ function addToCart(item) {
         cart.push({...item, quantity: item.quantity || 1});
     }
     saveCart(cart);
-    // show success feedback but do NOT redirect on close
     showPopup("Producto añadido al carrito.", true, false);
 }
 
@@ -487,9 +481,7 @@ function renderCartPage() {
             `;
             container.appendChild(itemEl);
 
-            // populate sizes select (only if there are valid sizes)
             const sizeSelect = itemEl.querySelector('.cart-size-select');
-            // filter out 'default' like sizes (same logic as product loaders)
             const rawSizes = it.options || (it.availableSizes || []);
             const sizes = (rawSizes || []).filter(s => {
                 if (!s) return false;
@@ -497,7 +489,7 @@ function renderCartPage() {
                 return low !== 'default' && low !== 'default title';
             });
             if (!sizes.length) {
-                // no sizes -> remove the size paragraph (talla única)
+                // Si es talla única
                 const sizePara = itemEl.querySelector('.cart-item-size');
                 if (sizePara) sizePara.remove();
             } else {
@@ -520,7 +512,6 @@ function renderCartPage() {
             total += (it.unitPrice || 0) * (it.quantity || 1);
         });
 
-        // attach qty and remove handlers
         container.querySelectorAll('.qty-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const idx = Number(e.target.dataset.idx);
@@ -538,7 +529,7 @@ function renderCartPage() {
         });
 
         document.getElementById('cart-total').textContent = formatCurrency(total);
-        // attach checkout handler
+
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => openCheckoutPopup(total));
@@ -592,9 +583,9 @@ function openCheckoutPopup(totalAmount) {
 
     popup.classList.remove('popup-hidden');
 
-    // attach submit handler
+
     const submit = document.getElementById('checkoutSubmit');
-    // allow only digits in card input and set numeric inputmode
+
     const cardInput = document.getElementById('checkoutCard');
     if (cardInput) {
         cardInput.setAttribute('inputmode', 'numeric');
@@ -605,7 +596,7 @@ function openCheckoutPopup(totalAmount) {
     }
     if (submit) {
         submit.addEventListener('click', () => {
-            // basic validation
+
             const card = document.getElementById('checkoutCard')?.value?.trim();
             if (!logged) {
                 const name = document.getElementById('checkoutName')?.value?.trim();
@@ -623,7 +614,6 @@ function openCheckoutPopup(totalAmount) {
                 }
             }
 
-            // build purchase payload and send to backend
             (async () => {
                 const cart = getCart();
                 if (!cart.length) {
@@ -669,7 +659,7 @@ function openCheckoutPopup(totalAmount) {
                     });
                     const resJson = await resp.json();
                     if (resp.ok && resJson && resJson.success) {
-                        // success
+
                         saveCart([]);
                         renderCartPage();
                         closePopup();
@@ -724,7 +714,7 @@ const cambiarImagenIndie = () => {
     }, 2500);
 };
 
-// ===== FORMULARIO DE CONTACTO =====
+// FORMULARIO DE CONTACTO
 const initContactForm = () => {
     const form = document.getElementById("contactForm");
     const artistInfoFieldset = document.getElementById("artistInfo");
@@ -987,9 +977,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let popupRedirectOnClose = false;
 
-// showPopup(message, success, redirectOnClose = success)
-// - `success`: toggles success/error styles
-// - `redirectOnClose`: if true, closing the popup redirects to inicio (keeps legacy behavior)
 const showPopup = (message, success, redirectOnClose) => {
     const popup = document.getElementById("authPopup");
     const popupTitle = document.getElementById("authPopupTitle");
@@ -1005,10 +992,8 @@ const showPopup = (message, success, redirectOnClose) => {
     popup.classList.remove("popup-hidden");
     popupRedirectOnClose = !!redirectOnClose;
 
-    // If it's a non-redirecting success (e.g. addToCart), auto-close after a short delay
     if (success && !popupRedirectOnClose) {
         setTimeout(() => {
-            // ensure we only auto-close if still visible
             if (!popup.classList.contains('popup-hidden')) closePopup();
         }, 1500);
     }
@@ -1040,4 +1025,3 @@ function initPageElementFade() {
         document.body.classList.add('page-fade-entered');
     });
 }
-
