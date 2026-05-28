@@ -52,6 +52,40 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.product img.product-zoomable {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.product img.product-zoomable:hover {
+    transform: scale(1.03);
+}
+
+.product-image-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.8);
+    cursor: zoom-out;
+}
+
+.product-image-viewer.is-open {
+    display: flex;
+}
+
+.product-image-viewer__img {
+    max-width: min(92vw, 1000px);
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55);
+}
+
 .product h3 {
     text-align: center;
     font-family: "Syne", sans-serif;

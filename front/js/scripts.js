@@ -9,6 +9,61 @@ const spotifyPlayer = () => {
 
 const DEFAULT_PRODUCT_IMAGE = "/assets/logoPNGwhite.png";
 
+let productImageViewer = null;
+
+function getProductImageViewer() {
+    if (productImageViewer) {
+        return productImageViewer;
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "product-image-viewer";
+
+    const largeImage = document.createElement("img");
+    largeImage.className = "product-image-viewer__img";
+    largeImage.alt = "Imagen ampliada del producto";
+
+    overlay.appendChild(largeImage);
+    document.body.appendChild(overlay);
+
+    const close = () => {
+        overlay.classList.remove("is-open");
+        largeImage.src = "";
+    };
+
+    overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) {
+            close();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+            close();
+        }
+    });
+
+    productImageViewer = {
+        open: (src, alt) => {
+            largeImage.src = src;
+            largeImage.alt = alt || "Imagen ampliada del producto";
+            overlay.classList.add("is-open");
+        },
+    };
+
+    return productImageViewer;
+}
+
+function attachProductImageZoom(img) {
+    img.classList.add("product-zoomable");
+    img.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const viewer = getProductImageViewer();
+        viewer.open(img.currentSrc || img.src, img.alt);
+    });
+}
+
 function createImageElement(src, alt) {
     const img = document.createElement("img");
     img.src = src || DEFAULT_PRODUCT_IMAGE;
@@ -17,6 +72,7 @@ function createImageElement(src, alt) {
         img.onerror = null;
         img.src = DEFAULT_PRODUCT_IMAGE;
     };
+    attachProductImageZoom(img);
     return img;
 }
 
