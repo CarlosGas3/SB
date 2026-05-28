@@ -151,6 +151,21 @@ public class EmailService {
                 .append(String.format("%.2f", purchase.getTotal()))
                 .append("€\n");
 
+        com.example.demo.model.ShippingInfo si = purchase.getShippingInfo();
+        if (si != null) {
+            String address = safe(si.getAddress());
+            String city = safe(si.getCity());
+            if (!address.isBlank() || !city.isBlank()) {
+                builder.append("\nDirección de envío:\n");
+                if (!address.isBlank()) {
+                    builder.append("  Dirección: ").append(address).append("\n");
+                }
+                if (!city.isBlank()) {
+                    builder.append("  Ciudad: ").append(city).append("\n");
+                }
+            }
+        }
+
         return builder.toString();
     }
 
