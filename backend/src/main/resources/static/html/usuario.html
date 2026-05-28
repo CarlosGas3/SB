@@ -3,9 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ShadowBan - Productos de SWYRY</title>
-        <link rel="stylesheet" href="../css/products.css" />
-        <script src="../js/scripts.js"></script>
+        <title>ShadowBan - Mi cuenta</title>
+        <link rel="stylesheet" href="../css/iniciarSesion.css" />
         <link rel="icon" type="image/png" href="../assets/favicon.png" />
     </head>
 
@@ -35,7 +34,7 @@
                     /></a>
                 </li>
                 <li>
-                    <a href="iniciarSesion.html" id="userNavLink"
+                    <a href="usuario.html" id="userNavLink"
                         ><img
                             src="../assets/usuario.png"
                             alt="Mi cuenta"
@@ -45,22 +44,11 @@
             </ul>
         </header>
         <main>
-            <a href="products.html">
-                <button id="back"><img src="../assets/back.png" /></button>
-            </a>
-            <div id="products"></div>
-            <img
-                id="spotify"
-                src="../assets/spotify.webp"
-                alt="Logo de Spotify"
-            />
-            <div id="overlay">
-                <iframe src="spotifyPlayer.html"></iframe>
-            </div>
-            <script>
-                loadProductsSwyry();
-                spotifyPlayer();
-            </script>
+            <article id="miCuenta">
+                <h2 id="saludo">Hola</h2>
+                <p id="usuarioEmail" class="usuario-email"></p>
+                <button type="button" id="logoutButton">Cerrar sesión</button>
+            </article>
         </main>
         <footer>
             <img
@@ -70,5 +58,17 @@
             />
             <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
         </footer>
+
+        <div id="authPopup" class="popup-overlay popup-hidden">
+            <div class="popup-content">
+                <button type="button" id="popupClose" class="popup-close">
+                    ×
+                </button>
+                <h3 id="authPopupTitle">Aviso</h3>
+                <p id="authPopupMessage">Aquí irá el mensaje.</p>
+            </div>
+        </div>
+
+        <script src="../js/scripts.js"></script>
     </body>
 </html>

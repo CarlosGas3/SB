@@ -1008,15 +1008,66 @@ const initAuthForms = () => {
     }
 };
 
+function initUserNavLink() {
+    const link = document.getElementById("userNavLink");
+    if (!link) return;
+    if (isLoggedIn()) {
+        link.href = "usuario.html";
+    } else {
+        link.href = "iniciarSesion.html";
+    }
+}
+
+function logout() {
+    try {
+        localStorage.removeItem('sb_user');
+    } catch (e) {}
+    window.location.href = "iniciarSesion.html";
+}
+
+function initUsuarioPage() {
+    if (!document.getElementById("saludo")) return;
+
+    if (!isLoggedIn()) {
+        window.location.replace("iniciarSesion.html");
+        return;
+    }
+
+    try {
+        const userRaw = localStorage.getItem('sb_user');
+        const userObj = userRaw ? JSON.parse(userRaw) : null;
+        const rawName = userObj?.name || "";
+        const nombre = rawName
+            ? rawName.replace(/\b\w/g, c => c.toUpperCase())
+            : (userObj?.email || "usuario");
+        const email = userObj?.email || "";
+
+        const saludo = document.getElementById("saludo");
+        if (saludo) saludo.textContent = `Hola, ${nombre}`;
+
+        const emailEl = document.getElementById("usuarioEmail");
+        if (emailEl) emailEl.textContent = nombre;
+    } catch (e) {}
+
+    const logoutBtn = document.getElementById("logoutButton");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logout);
+    }
+}
+
 // Inicializar el formulario cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
     initPageElementFade();
+    initUserNavLink();
 
     if (document.getElementById("contactForm")) {
         initContactForm();
     }
     if (document.getElementById("loginForm") || document.getElementById("registerForm")) {
         initAuthForms();
+    }
+    if (document.getElementById("saludo")) {
+        initUsuarioPage();
     }
 
     const popupClose = document.getElementById("popupClose");
