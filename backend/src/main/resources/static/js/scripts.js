@@ -1053,6 +1053,135 @@ function initUsuarioPage() {
     if (logoutBtn) {
         logoutBtn.addEventListener("click", logout);
     }
+
+    const editBtn = document.getElementById("editProfileButton");
+    if (editBtn) {
+        editBtn.addEventListener("click", () => {
+            window.location.href = "editarPerfil.html";
+        });
+    }
+
+    // Init editarPerfil page if present
+    if (document.getElementById('editProfileForm')) {
+        initEditProfilePage();
+    }
+}
+
+function initEditProfilePage() {
+    if (!isLoggedIn()) {
+        window.location.replace("iniciarSesion.html");
+        return;
+    }
+
+    const userRaw = localStorage.getItem('sb_user');
+    const userObj = userRaw ? JSON.parse(userRaw) : null;
+    const userId = userObj?.id;
+
+    const phoneInput = document.getElementById('phoneInput');
+    const addressInput = document.getElementById('addressInput');
+    const cityInput = document.getElementById('cityInput');
+    const countryInput = document.getElementById('countryInput');
+
+    if (userObj) {
+        phoneInput.value = userObj.phone || '';
+        addressInput.value = userObj.address || '';
+        cityInput.value = userObj.city || '';
+        countryInput.value = userObj.country || '';
+    }
+
+    const form = document.getElementById('editProfileForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+            phone: phoneInput.value.trim(),
+            address: addressInput.value.trim(),
+            city: cityInput.value.trim(),
+            country: countryInput.value.trim()
+        };
+        try {
+            const resp = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await resp.json();
+            if (resp.ok && result.success) {
+                localStorage.setItem('sb_user', JSON.stringify(result.data));
+                showPopup('Perfil actualizado', true);
+            } else {
+                showPopup(result.message || 'Error actualizando perfil', false);
+            }
+        } catch (err) {
+            console.error(err);
+            showPopup('Error de conexión al backend', false);
+        }
+    });
+
+    // change password flow using authPopup
+    const changeBtn = document.getElementById('changePasswordButton');
+    const authPopup = document.getElementById('authPopup');
+    const popupTitle = document.getElementById('authPopupTitle');
+    const popupMessage = document.getElementById('authPopupMessage');
+
+    if (changeBtn) changeBtn.addEventListener('click', () => {
+        popupTitle.textContent = 'Cambiar contraseña';
+        popupMessage.innerHTML = `
+            <form class="checkout-form" id="cp_form">
+                <label for="cp_current">Contraseña actual</label>
+                <input id="cp_current" type="password" />
+                <div id="cp_verify_row">
+                    <button type="button" id="cp_verify">Verificar</button>
+                </div>
+                <div id="cp_new" style="display:none;margin-top:6px;">
+                    <label for="cp_new_input">Nueva contraseña</label>
+                    <input id="cp_new_input" type="password" />
+                    <button type="button" id="cp_submit">Guardar nueva contraseña</button>
+                </div>
+                <p id="cp_msg" style="color:red;"></p>
+            </form>`;
+        authPopup.classList.remove('popup-hidden');
+
+        const cp_verify = document.getElementById('cp_verify');
+        const cp_submit = document.getElementById('cp_submit');
+        const cp_current = document.getElementById('cp_current');
+        const cp_new_input = document.getElementById('cp_new_input');
+        const cp_new = document.getElementById('cp_new');
+        const cp_msg = document.getElementById('cp_msg');
+
+        cp_verify.addEventListener('click', async () => {
+            const current = cp_current.value || '';
+            if (!current) { cp_msg.textContent = 'Introduce tu contraseña actual'; return; }
+            try {
+                const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ currentPassword: current })
+                });
+                const result = await resp.json();
+                if (resp.ok && result.success) {
+                    cp_new.style.display = 'block';
+                    cp_msg.textContent = 'Contraseña verificada. Introduce la nueva.';
+                } else {
+                    cp_msg.textContent = result.message || 'Contraseña incorrecta';
+                }
+            } catch (e) { console.error(e); cp_msg.textContent = 'Error de conexión'; }
+        });
+
+        cp_submit.addEventListener('click', async () => {
+            const newPass = cp_new_input.value || '';
+            if (!newPass) { cp_msg.textContent = 'Introduce la nueva contraseña'; return; }
+            try {
+                const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ currentPassword: cp_current.value || '', newPassword: newPass })
+                });
+                const result = await resp.json();
+                if (resp.ok && result.success) {
+                    showPopup('Contraseña actualizada', true);
+                    authPopup.classList.add('popup-hidden');
+                } else {
+                    cp_msg.textContent = result.message || 'No se pudo cambiar la contraseña';
+                }
+            } catch (e) { console.error(e); cp_msg.textContent = 'Error de conexión'; }
+        });
+    });
 }
 
 // Inicializar el formulario cuando el DOM esté listo
@@ -1068,6 +1197,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (document.getElementById("saludo")) {
         initUsuarioPage();
+    }
+    if (document.getElementById('editProfileForm')) {
+        initEditProfilePage();
     }
 
     const popupClose = document.getElementById("popupClose");

@@ -11,6 +11,7 @@ import com.example.demo.model.User;
 
 @Repository
 public class UserRepository {
+
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<User> rowMapper = (rs, rowNum) -> {
         User user = new User();
@@ -69,5 +70,10 @@ public class UserRepository {
                 update.getCountry(),
                 update.getId());
         return rows == 0 ? Optional.empty() : findById(update.getId());
+    }
+
+    public Optional<User> updatePassword(String id, String encodedPassword) {
+        int rows = jdbcTemplate.update("UPDATE users SET password = ? WHERE id = ?", encodedPassword, id);
+        return rows == 0 ? Optional.empty() : findById(id);
     }
 }

@@ -46,7 +46,17 @@
         <main>
             <article id="miCuenta">
                 <h2 id="saludo">Hola</h2>
-                <button type="button" id="logoutButton">Cerrar sesión</button>
+                <button
+                    type="button"
+                    id="editProfileButton"
+                    class="btn-primary"
+                    onclick="window.location.href = 'editarPerfil.html'"
+                >
+                    Editar Perfil
+                </button>
+                <button type="button" id="logoutButton" class="btn-primary">
+                    Cerrar sesión
+                </button>
             </article>
         </main>
         <footer>
@@ -57,16 +67,6 @@
             />
             <p>&copy; 2025 ShadowBan | Todos los derechos reservados.</p>
         </footer>
-
-        <div id="authPopup" class="popup-overlay popup-hidden">
-            <div class="popup-content">
-                <button type="button" id="popupClose" class="popup-close">
-                    ×
-                </button>
-                <h3 id="authPopupTitle">Aviso</h3>
-                <p id="authPopupMessage">Aquí irá el mensaje.</p>
-            </div>
-        </div>
 
         <script src="../js/scripts.js"></script>
     </body>

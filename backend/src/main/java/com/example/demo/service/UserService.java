@@ -10,6 +10,7 @@ import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -68,5 +69,30 @@ public class UserService {
             existing.setCountry(update.getCountry() != null ? update.getCountry() : existing.getCountry());
             return userRepository.update(existing);
         });
+    }
+
+    public Optional<User> changePassword(String id, String currentPassword, String newPassword) {
+        return userRepository.findById(id).flatMap(existing -> {
+            String stored = existing.getPassword();
+            if (stored == null) {
+                return Optional.empty();
+            }
+            boolean ok = passwordEncoder.matches(currentPassword, stored) || stored.equals(currentPassword);
+            if (!ok) {
+                return Optional.empty();
+            }
+            String encoded = passwordEncoder.encode(newPassword);
+            return userRepository.updatePassword(id, encoded);
+        });
+    }
+
+    public boolean verifyPassword(String id, String currentPassword) {
+        return userRepository.findById(id).map(existing -> {
+            String stored = existing.getPassword();
+            if (stored == null) {
+                return false;
+            }
+            return passwordEncoder.matches(currentPassword, stored) || stored.equals(currentPassword);
+        }).orElse(false);
     }
 }

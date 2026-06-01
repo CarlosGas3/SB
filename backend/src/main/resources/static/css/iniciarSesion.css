@@ -309,10 +309,32 @@ details[open] > form {
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    transition: filter var(--ease), transform var(--ease);
+    transition:
+        filter var(--ease),
+        transform var(--ease);
 }
 
 #logoutButton:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+/* Reusable primary button matching logout style */
+.btn-primary {
+    margin-top: 8px;
+    padding: 12px 28px;
+    border-radius: var(--radius-btn);
+    border: none;
+    background: linear-gradient(90deg, #7c3aed, #c4b5fd);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        filter var(--ease),
+        transform var(--ease);
+}
+.btn-primary:hover {
     filter: brightness(1.08);
     transform: translateY(-1px);
 }

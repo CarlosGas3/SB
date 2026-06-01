@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ShadowBan - Editar Perfil</title>
+        <link rel="stylesheet" href="../css/iniciarSesion.css" />
+        <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    </head>
+
+    <body>
+        <header>
+            <a href="inicio.html"
+                ><img
+                    src="../assets/logo_large_w_transparent.png"
+                    alt="Logo"
+                    id="logo"
+            /></a>
+            <ul>
+                <li>
+                    <a href="contacto.html"
+                        ><img
+                            src="../assets/info.png"
+                            alt="Contacto"
+                            class="icono"
+                    /></a>
+                </li>
+                <li>
+                    <a href="carrito.html"
+                        ><img
+                            src="../assets/carrito.png"
+                            alt="Carrito"
+                            class="icono"
+                    /></a>
+                </li>
+                <li>
+                    <a href="usuario.html" id="userNavLink"
+                        ><img
+                            src="../assets/usuario.png"
+                            alt="Mi cuenta"
+                            class="icono"
+                    /></a>
+                </li>
+            </ul>
+        </header>
+        <main>
+            <article id="editarPerfil">
+                <h2>Editar Perfil</h2>
+                <form id="editProfileForm">
+                    <label for="phoneInput">Teléfono:</label>
+                    <input id="phoneInput" type="number" />
+
+                    <label for="addressInput">Dirección:</label>
+                    <input id="addressInput" type="text" />
+
+                    <label for="cityInput">Ciudad:</label>
+                    <input id="cityInput" type="text" />
+
+                    <label for="countryInput">País:</label>
+                    <input id="countryInput" type="text" />
+
+                    <button
+                        type="submit"
+                        id="saveProfileButton"
+                        class="btn-primary"
+                    >
+                        Guardar
+                    </button>
+                    <button
+                        type="button"
+                        id="changePasswordButton"
+                        class="btn-primary"
+                    >
+                        Cambiar contraseña
+                    </button>
+                </form>
+            </article>
+        </main>
+
+        <div id="authPopup" class="popup-overlay popup-hidden">
+            <div class="popup-content">
+                <button type="button" id="popupClose" class="popup-close">
+                    ×
+                </button>
+                <h3 id="authPopupTitle">Aviso</h3>
+                <div id="authPopupMessage">Aquí irá el mensaje.</div>
+            </div>
+        </div>
+
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
