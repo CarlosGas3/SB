@@ -54,133 +54,6 @@ function getProductImageViewer() {
     return productImageViewer;
 }
 
-function attachProductImageZoom(img) {
-    img.classList.add("product-zoomable");
-    img.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const viewer = getProductImageViewer();
-        viewer.open(img.currentSrc || img.src, img.alt);
-    });
-}
-
-function createImageElement(src, alt) {
-    const img = document.createElement("img");
-    img.src = src || DEFAULT_PRODUCT_IMAGE;
-    img.alt = alt || "Producto";
-    img.onerror = () => {
-        img.onerror = null;
-        img.src = DEFAULT_PRODUCT_IMAGE;
-    };
-    attachProductImageZoom(img);
-    return img;
-}
-
-async function loadProductsVinsi() {
-    try {
-        let products;
-        try {
-            const res = await fetch("/api/mock/products/vinsi");
-            if (!res.ok) throw new Error("API no disponible");
-            products = await res.json();
-        } catch {
-            const res = await fetch("../JSON/productsVinsi72.json");
-            products = await res.json();
-        }
-
-        const container = document.getElementById("products");
-        container.innerHTML = "";
-
-        products.forEach((p) => {
-            const div = document.createElement("div");
-            div.className = "product";
-            let price = p.price ? p.price + "€" : "Este producto no está disponible por ahora.";
-            let btnText = isNaN(p.price) ? "Ver producto" : "Añadir al carrito";
-            const imageUrl = p.images?.[0]?.url || DEFAULT_PRODUCT_IMAGE;
-
-            const image = createImageElement(imageUrl, p.name);
-            const title = document.createElement("h3");
-            title.textContent = p.name;
-            const priceEl = document.createElement("p");
-            priceEl.textContent = price;
-            const button = document.createElement("button");
-            button.textContent = btnText;
-
-            button.addEventListener("click", (e) => {
-                const sizeSelect = div.querySelector('.size-select');
-                if (btnText === 'Añadir al carrito') {
-                    const selectedSize = sizeSelect ? sizeSelect.value : '';
-                    if (sizeSelect && !selectedSize) {
-                        showPopup('Selecciona una talla antes de añadir al carrito', false);
-                        return;
-                    }
-                    addToCart({
-                        id: p.id || p.handle || p.title,
-                        name: p.name || p.title,
-                        image: imageUrl,
-                        unitPrice: Number(p.price) || 0,
-                        size: selectedSize,
-                        options: (p.options || []).map(o => o.name).filter(Boolean)
-                    });
-                    // inline feedback: cambiar texto botón brevemente
-                    const _orig = button.textContent;
-                    button.textContent = 'Añadido';
-                    button.disabled = true;
-                    setTimeout(() => {
-                        button.textContent = _orig;
-                        button.disabled = !(sizeSelect && sizeSelect.value);
-                    }, 1500);
-                } else {
-                    window.open(`https://www.vinsi72.com${p.url}`, "_blank");
-                }
-            });
-
-            div.append(image, title, priceEl, button);
-
-            // Mostrar desplegable de tallas si el producto tiene status: active y opciones
-            if (p.status === "active" && p.options && p.options.length > 0) {
-                const validOptions = p.options.filter(opt => {
-                    const name = (opt.name || "").toLowerCase();
-                    return name !== "default" && name !== "default title";
-                });
-                
-                if (validOptions.length > 0) {
-                    const sizeSelect = document.createElement("select");
-                    sizeSelect.className = "size-select";
-                    
-                    const defaultOption = document.createElement("option");
-                    defaultOption.value = "";
-                    defaultOption.textContent = "Selecciona una talla";
-                    defaultOption.disabled = true;
-                    defaultOption.selected = true;
-                    sizeSelect.appendChild(defaultOption);
-
-                    // Agregar cada talla al desplegable
-                    validOptions.forEach((option) => {
-                        const opt = document.createElement("option");
-                        opt.value = option.name;
-                        opt.textContent = option.name + (option.sold_out ? " (Agotado)" : "");
-                        opt.disabled = option.sold_out;
-                        sizeSelect.appendChild(opt);
-                    });
-
-                    // Sin talla botón deshabilitado
-                    button.disabled = true;
-                    sizeSelect.addEventListener('change', () => {
-                        button.disabled = !sizeSelect.value;
-                    });
-                    div.insertBefore(sizeSelect, button);
-                }
-            }
-
-            container.appendChild(div);
-        });
-    } catch (error) {
-        console.error("Error cargando productos:", error);
-        document.getElementById("products").innerText =
-            "Error cargando productos.";
-    }
-}
 
 async function loadProductsBose() {
     try {
@@ -1061,7 +934,6 @@ function initUsuarioPage() {
         });
     }
 
-    // Init editarPerfil page if present
     if (document.getElementById('editProfileForm')) {
         initEditProfilePage();
     }
@@ -1123,65 +995,75 @@ function initEditProfilePage() {
     const popupTitle = document.getElementById('authPopupTitle');
     const popupMessage = document.getElementById('authPopupMessage');
 
-    if (changeBtn) changeBtn.addEventListener('click', () => {
-        popupTitle.textContent = 'Cambiar contraseña';
-        popupMessage.innerHTML = `
-            <form class="checkout-form" id="cp_form">
-                <label for="cp_current">Contraseña actual</label>
-                <input id="cp_current" type="password" />
-                <div id="cp_verify_row">
+    if (changeBtn) {
+        changeBtn.addEventListener('click', () => {
+            popupTitle.textContent = 'Cambiar contraseña';
+            popupMessage.innerHTML = `
+                <form class="checkout-form" id="cp_form">
+                    <label for="cp_current">Contraseña actual</label>
+                    <input id="cp_current" type="password" />
                     <button type="button" id="cp_verify">Verificar</button>
-                </div>
-                <div id="cp_new" style="display:none;margin-top:6px;">
-                    <label for="cp_new_input">Nueva contraseña</label>
-                    <input id="cp_new_input" type="password" />
-                    <button type="button" id="cp_submit">Guardar nueva contraseña</button>
-                </div>
-                <p id="cp_msg" style="color:red;"></p>
-            </form>`;
-        authPopup.classList.remove('popup-hidden');
+                    <div id="cp_new" style="display:none; margin-top: 12px;">
+                        <label for="cp_new_input">Nueva contraseña</label>
+                        <input id="cp_new_input" type="password" />
+                        <button type="button" id="cp_submit">Guardar nueva contraseña</button>
+                    </div>
+                    <p id="cp_msg" style="color:red; margin: 0; font-size:0.95rem;"></p>
+                </form>`;
+            authPopup.classList.remove('popup-hidden');
 
-        const cp_verify = document.getElementById('cp_verify');
-        const cp_submit = document.getElementById('cp_submit');
-        const cp_current = document.getElementById('cp_current');
-        const cp_new_input = document.getElementById('cp_new_input');
-        const cp_new = document.getElementById('cp_new');
-        const cp_msg = document.getElementById('cp_msg');
+            const cp_verify = document.getElementById('cp_verify');
+            const cp_submit = document.getElementById('cp_submit');
+            const cp_current = document.getElementById('cp_current');
+            const cp_new_input = document.getElementById('cp_new_input');
+            const cp_new = document.getElementById('cp_new');
+            const cp_msg = document.getElementById('cp_msg');
 
-        cp_verify.addEventListener('click', async () => {
-            const current = cp_current.value || '';
-            if (!current) { cp_msg.textContent = 'Introduce tu contraseña actual'; return; }
-            try {
-                const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ currentPassword: current })
-                });
-                const result = await resp.json();
-                if (resp.ok && result.success) {
-                    cp_new.style.display = 'block';
-                    cp_msg.textContent = 'Contraseña verificada. Introduce la nueva.';
-                } else {
-                    cp_msg.textContent = result.message || 'Contraseña incorrecta';
+            cp_verify.addEventListener('click', async () => {
+                const current = cp_current.value || '';
+                if (!current) { cp_msg.textContent = 'Introduce tu contraseña actual'; return; }
+                try {
+                    const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ currentPassword: current })
+                    });
+                    const result = await resp.json();
+                    if (resp.ok && result.success) {
+                        cp_new.style.display = 'block';
+                        cp_msg.textContent = 'Contraseña verificada. Introduce la nueva.';
+                    } else {
+                        cp_msg.textContent = result.message || 'Contraseña incorrecta';
+                    }
+                } catch (e) {
+                    console.error(e);
+                    cp_msg.textContent = 'Error de conexión';
                 }
-            } catch (e) { console.error(e); cp_msg.textContent = 'Error de conexión'; }
-        });
+            });
 
-        cp_submit.addEventListener('click', async () => {
-            const newPass = cp_new_input.value || '';
-            if (!newPass) { cp_msg.textContent = 'Introduce la nueva contraseña'; return; }
-            try {
-                const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ currentPassword: cp_current.value || '', newPassword: newPass })
-                });
-                const result = await resp.json();
-                if (resp.ok && result.success) {
-                    showPopup('Contraseña actualizada', true);
-                    authPopup.classList.add('popup-hidden');
-                } else {
-                    cp_msg.textContent = result.message || 'No se pudo cambiar la contraseña';
+            cp_submit.addEventListener('click', async () => {
+                const newPass = cp_new_input.value || '';
+                if (!newPass) { cp_msg.textContent = 'Introduce la nueva contraseña'; return; }
+                try {
+                    const resp = await fetch(`${API_BASE_URL}/api/users/${userId}/change-password`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ currentPassword: cp_current.value || '', newPassword: newPass })
+                    });
+                    const result = await resp.json();
+                    if (resp.ok && result.success) {
+                        showPopup('Contraseña actualizada', true);
+                        authPopup.classList.add('popup-hidden');
+                    } else {
+                        cp_msg.textContent = result.message || 'No se pudo cambiar la contraseña';
+                    }
+                } catch (e) {
+                    console.error(e);
+                    cp_msg.textContent = 'Error de conexión';
                 }
-            } catch (e) { console.error(e); cp_msg.textContent = 'Error de conexión'; }
+            });
         });
-    });
+    }
 }
 
 // Inicializar el formulario cuando el DOM esté listo
