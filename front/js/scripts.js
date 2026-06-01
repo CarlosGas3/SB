@@ -148,7 +148,35 @@ async function loadProductsVinsi() {
             priceEl.textContent = price;
             const button = document.createElement("button");
             button.textContent = btnText;
-            button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+
+            button.addEventListener("click", (e) => {
+                const sizeSelect = div.querySelector('.size-select');
+                if (btnText === 'Añadir al carrito') {
+                    const selectedSize = sizeSelect ? sizeSelect.value : '';
+                    if (sizeSelect && !selectedSize) {
+                        showPopup('Selecciona una talla antes de añadir al carrito', false);
+                        return;
+                    }
+                    addToCart({
+                        id: p.id || p.handle || p.title,
+                        name: p.name || p.title,
+                        image: imageUrl,
+                        unitPrice: Number(p.price) || 0,
+                        size: selectedSize,
+                        options: (p.options || []).map(o => o.name).filter(Boolean)
+                    });
+                    // inline feedback: cambiar texto botón brevemente
+                    const _orig = button.textContent;
+                    button.textContent = 'Añadido';
+                    button.disabled = true;
+                    setTimeout(() => {
+                        button.textContent = _orig;
+                        button.disabled = !(sizeSelect && sizeSelect.value);
+                    }, 1500);
+                } else {
+                    window.open(`https://www.vinsi72.com${p.url}`, "_blank");
+                }
+            });
 
             div.append(image, title, priceEl, button);
 
@@ -158,11 +186,11 @@ async function loadProductsVinsi() {
                     const name = (opt.name || "").toLowerCase();
                     return name !== "default" && name !== "default title";
                 });
-                
+
                 if (validOptions.length > 0) {
                     const sizeSelect = document.createElement("select");
                     sizeSelect.className = "size-select";
-                    
+
                     const defaultOption = document.createElement("option");
                     defaultOption.value = "";
                     defaultOption.textContent = "Selecciona una talla";
@@ -170,7 +198,7 @@ async function loadProductsVinsi() {
                     defaultOption.selected = true;
                     sizeSelect.appendChild(defaultOption);
 
-                    // Agregar cada opción (talla) al desplegable
+                    // Agregar cada talla al desplegable
                     validOptions.forEach((option) => {
                         const opt = document.createElement("option");
                         opt.value = option.name;
@@ -179,6 +207,11 @@ async function loadProductsVinsi() {
                         sizeSelect.appendChild(opt);
                     });
 
+                    // Sin talla botón deshabilitado
+                    button.disabled = true;
+                    sizeSelect.addEventListener('change', () => {
+                        button.disabled = !sizeSelect.value;
+                    });
                     div.insertBefore(sizeSelect, button);
                 }
             }
@@ -742,7 +775,6 @@ function openCheckoutPopup(totalAmount) {
         }, { once: true });
     }
 }
-
 
 const cambiarImagenMerchan = () => {
     const img = document.getElementById("merchan");
