@@ -54,6 +54,143 @@ function getProductImageViewer() {
     return productImageViewer;
 }
 
+function attachProductImageZoom(img) {
+    img.classList.add("product-zoomable");
+    img.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const viewer = getProductImageViewer();
+        viewer.open(img.currentSrc || img.src, img.alt);
+    });
+}
+
+function createImageElement(src, alt) {
+    const img = document.createElement("img");
+    img.src = src || DEFAULT_PRODUCT_IMAGE;
+    img.alt = alt || "Producto";
+    img.onerror = () => {
+        img.onerror = null;
+        img.src = DEFAULT_PRODUCT_IMAGE;
+    };
+    attachProductImageZoom(img);
+    return img;
+}
+
+function getProductImageViewer() {
+    if (productImageViewer) {
+        return productImageViewer;
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "product-image-viewer";
+
+    const largeImage = document.createElement("img");
+    largeImage.className = "product-image-viewer__img";
+    largeImage.alt = "Imagen ampliada del producto";
+
+    overlay.appendChild(largeImage);
+    document.body.appendChild(overlay);
+
+    const close = () => {
+        overlay.classList.remove("is-open");
+        largeImage.src = "";
+    };
+
+    overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) {
+            close();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+            close();
+        }
+    });
+
+    productImageViewer = {
+        open: (src, alt) => {
+            largeImage.src = src;
+            largeImage.alt = alt || "Imagen ampliada del producto";
+            overlay.classList.add("is-open");
+        },
+    };
+
+    return productImageViewer;
+}
+
+async function loadProductsVinsi() {
+    try {
+        let products;
+        try {
+            const res = await fetch("/api/mock/products/vinsi");
+            if (!res.ok) throw new Error("API no disponible");
+            products = await res.json();
+        } catch {
+            const res = await fetch("../JSON/productsVinsi72.json");
+            products = await res.json();
+        }
+
+        const container = document.getElementById("products");
+        container.innerHTML = "";
+
+        products.forEach((p) => {
+            const div = document.createElement("div");
+            div.className = "product";
+            let price = p.price ? p.price + "€" : "Este producto no está disponible por ahora.";
+            let btnText = isNaN(p.price) ? "Ver producto" : "Añadir al carrito";
+            const imageUrl = p.images?.[0]?.url || DEFAULT_PRODUCT_IMAGE;
+
+            const image = createImageElement(imageUrl, p.name);
+            const title = document.createElement("h3");
+            title.textContent = p.name;
+            const priceEl = document.createElement("p");
+            priceEl.textContent = price;
+            const button = document.createElement("button");
+            button.textContent = btnText;
+            button.addEventListener("click", () => window.open(`https://www.vinsi72.com${p.url}`, "_blank"));
+
+            div.append(image, title, priceEl, button);
+
+            // Mostrar desplegable de tallas si el producto tiene status: active y opciones
+            if (p.status === "active" && p.options && p.options.length > 0) {
+                const validOptions = p.options.filter(opt => {
+                    const name = (opt.name || "").toLowerCase();
+                    return name !== "default" && name !== "default title";
+                });
+                
+                if (validOptions.length > 0) {
+                    const sizeSelect = document.createElement("select");
+                    sizeSelect.className = "size-select";
+                    
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Selecciona una talla";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    sizeSelect.appendChild(defaultOption);
+
+                    // Agregar cada opción (talla) al desplegable
+                    validOptions.forEach((option) => {
+                        const opt = document.createElement("option");
+                        opt.value = option.name;
+                        opt.textContent = option.name + (option.sold_out ? " (Agotado)" : "");
+                        opt.disabled = option.sold_out;
+                        sizeSelect.appendChild(opt);
+                    });
+
+                    div.insertBefore(sizeSelect, button);
+                }
+            }
+
+            container.appendChild(div);
+        });
+    } catch (error) {
+        console.error("Error cargando productos:", error);
+        document.getElementById("products").innerText =
+            "Error cargando productos.";
+    }
+}
 
 async function loadProductsBose() {
     try {
